@@ -6,14 +6,16 @@
     对外提供阻塞方法accept, 有新链接则暴露给业务逻辑处理类
 */
 
-#include "frp-cpp/base/nocopyable.h"
+#include "frp-cpp/src/nocopyable.h"
+#include "frp-cpp/src/TCPConnector.hpp"
 #include <netinet/in.h>
 #include <string>
 #include <string.h>
+#include <memory>
 
 namespace FRP 
 {
-
+typedef void (*CallBack)(std::unique_ptr<TCPConnector> connector);
 // 不对外提供copy方法，防止有问题 
 // 只在单线程使用
 class TCPServer : noncopyable {
@@ -21,10 +23,15 @@ public:
     
     TCPServer(const std::string& ip, const uint16_t& port);
 
-    int WaitConnect();
+    /*
+        使用场景：
+        1. 监听外网服务器管理端口，对新的客户端链接查询，使用一收一发模型进行监听
+        2. 用户发起链接，使用管理链接发送新增链接请求
+    */
+    void Loop(CallBack callback);
 
 private:
-    int listen();
+    int Listen();
 
 private:
     sockaddr_in servaddr;

@@ -33,9 +33,6 @@
   - 日志
     - 简单落盘即可
 
-- 目录结构
-  - net
-    - 封装读写socket接口
-      - ReadN(): 用来先读长度，再读payload
-      - Write(): 写socket
-      - ReadAll(): 读到返回0
+- 请求设计
+  见pb目录，使用protobuf做传输协议即可 
+   

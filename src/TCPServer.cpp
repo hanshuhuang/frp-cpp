@@ -60,7 +60,7 @@ void TCPServer::Loop(CallBack cb) {
             cout<<"accept err:"<<strerror(errno)<<endl;
             return;
         }
-        cout<<"get connection"<<endl;
+        
         auto handler = std::thread([&cb, &connFD](){
             cb(make_unique<TCPConnector>(connFD));
         });

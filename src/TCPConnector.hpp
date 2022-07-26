@@ -17,6 +17,8 @@ public:
 
     ssize_t Write(void *buf, size_t count);
 
+    void Close();
+
 private:
     int sockfd;
 };

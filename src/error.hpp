@@ -8,7 +8,8 @@ enum err {
     SUCC = 0,
     ERR_SOCK_ERR = 1,
     ERR_BIND_ERR = 2,
-    ERR_LISTEN_ERR
+    ERR_LISTEN_ERR = 3,
+    ERR_CONNECT_ERR = 4
 };
 
 

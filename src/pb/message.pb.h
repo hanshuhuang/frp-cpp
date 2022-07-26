@@ -65,9 +65,9 @@ extern AddConnRspDefaultTypeInternal _AddConnRsp_default_instance_;
 class Config;
 struct ConfigDefaultTypeInternal;
 extern ConfigDefaultTypeInternal _Config_default_instance_;
-class LocalProxy;
-struct LocalProxyDefaultTypeInternal;
-extern LocalProxyDefaultTypeInternal _LocalProxy_default_instance_;
+class LocalConf;
+struct LocalConfDefaultTypeInternal;
+extern LocalConfDefaultTypeInternal _LocalConf_default_instance_;
 class LoginReq;
 struct LoginReqDefaultTypeInternal;
 extern LoginReqDefaultTypeInternal _LoginReq_default_instance_;
@@ -77,19 +77,19 @@ extern LoginRspDefaultTypeInternal _LoginRsp_default_instance_;
 class Msg;
 struct MsgDefaultTypeInternal;
 extern MsgDefaultTypeInternal _Msg_default_instance_;
-class ProxyConf;
-struct ProxyConfDefaultTypeInternal;
-extern ProxyConfDefaultTypeInternal _ProxyConf_default_instance_;
+class ServerConf;
+struct ServerConfDefaultTypeInternal;
+extern ServerConfDefaultTypeInternal _ServerConf_default_instance_;
 }  // namespace frp
 PROTOBUF_NAMESPACE_OPEN
 template<> ::frp::AddConnReq* Arena::CreateMaybeMessage<::frp::AddConnReq>(Arena*);
 template<> ::frp::AddConnRsp* Arena::CreateMaybeMessage<::frp::AddConnRsp>(Arena*);
 template<> ::frp::Config* Arena::CreateMaybeMessage<::frp::Config>(Arena*);
-template<> ::frp::LocalProxy* Arena::CreateMaybeMessage<::frp::LocalProxy>(Arena*);
+template<> ::frp::LocalConf* Arena::CreateMaybeMessage<::frp::LocalConf>(Arena*);
 template<> ::frp::LoginReq* Arena::CreateMaybeMessage<::frp::LoginReq>(Arena*);
 template<> ::frp::LoginRsp* Arena::CreateMaybeMessage<::frp::LoginRsp>(Arena*);
 template<> ::frp::Msg* Arena::CreateMaybeMessage<::frp::Msg>(Arena*);
-template<> ::frp::ProxyConf* Arena::CreateMaybeMessage<::frp::ProxyConf>(Arena*);
+template<> ::frp::ServerConf* Arena::CreateMaybeMessage<::frp::ServerConf>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace frp {
 
@@ -499,25 +499,25 @@ class LoginReq final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kConfigFieldNumber = 1,
+    kLocalConfFieldNumber = 1,
   };
-  // .frp.Config config = 1;
-  bool has_config() const;
+  // .frp.LocalConf localConf = 1;
+  bool has_localconf() const;
   private:
-  bool _internal_has_config() const;
+  bool _internal_has_localconf() const;
   public:
-  void clear_config();
-  const ::frp::Config& config() const;
-  PROTOBUF_MUST_USE_RESULT ::frp::Config* release_config();
-  ::frp::Config* mutable_config();
-  void set_allocated_config(::frp::Config* config);
+  void clear_localconf();
+  const ::frp::LocalConf& localconf() const;
+  PROTOBUF_MUST_USE_RESULT ::frp::LocalConf* release_localconf();
+  ::frp::LocalConf* mutable_localconf();
+  void set_allocated_localconf(::frp::LocalConf* localconf);
   private:
-  const ::frp::Config& _internal_config() const;
-  ::frp::Config* _internal_mutable_config();
+  const ::frp::LocalConf& _internal_localconf() const;
+  ::frp::LocalConf* _internal_mutable_localconf();
   public:
-  void unsafe_arena_set_allocated_config(
-      ::frp::Config* config);
-  ::frp::Config* unsafe_arena_release_config();
+  void unsafe_arena_set_allocated_localconf(
+      ::frp::LocalConf* localconf);
+  ::frp::LocalConf* unsafe_arena_release_localconf();
 
   // @@protoc_insertion_point(class_scope:frp.LoginReq)
  private:
@@ -526,7 +526,7 @@ class LoginReq final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::frp::Config* config_;
+  ::frp::LocalConf* localconf_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -1120,44 +1120,44 @@ class Config final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kLocalProxiesFieldNumber = 2,
-    kProxyConfFieldNumber = 1,
+    kLocalConfsFieldNumber = 2,
+    kServerConfFieldNumber = 1,
   };
-  // repeated .frp.LocalProxy localProxies = 2;
-  int localproxies_size() const;
+  // repeated .frp.LocalConf localConfs = 2;
+  int localconfs_size() const;
   private:
-  int _internal_localproxies_size() const;
+  int _internal_localconfs_size() const;
   public:
-  void clear_localproxies();
-  ::frp::LocalProxy* mutable_localproxies(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalProxy >*
-      mutable_localproxies();
+  void clear_localconfs();
+  ::frp::LocalConf* mutable_localconfs(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalConf >*
+      mutable_localconfs();
   private:
-  const ::frp::LocalProxy& _internal_localproxies(int index) const;
-  ::frp::LocalProxy* _internal_add_localproxies();
+  const ::frp::LocalConf& _internal_localconfs(int index) const;
+  ::frp::LocalConf* _internal_add_localconfs();
   public:
-  const ::frp::LocalProxy& localproxies(int index) const;
-  ::frp::LocalProxy* add_localproxies();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalProxy >&
-      localproxies() const;
+  const ::frp::LocalConf& localconfs(int index) const;
+  ::frp::LocalConf* add_localconfs();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalConf >&
+      localconfs() const;
 
-  // .frp.ProxyConf proxyConf = 1;
-  bool has_proxyconf() const;
+  // .frp.ServerConf serverConf = 1;
+  bool has_serverconf() const;
   private:
-  bool _internal_has_proxyconf() const;
+  bool _internal_has_serverconf() const;
   public:
-  void clear_proxyconf();
-  const ::frp::ProxyConf& proxyconf() const;
-  PROTOBUF_MUST_USE_RESULT ::frp::ProxyConf* release_proxyconf();
-  ::frp::ProxyConf* mutable_proxyconf();
-  void set_allocated_proxyconf(::frp::ProxyConf* proxyconf);
+  void clear_serverconf();
+  const ::frp::ServerConf& serverconf() const;
+  PROTOBUF_MUST_USE_RESULT ::frp::ServerConf* release_serverconf();
+  ::frp::ServerConf* mutable_serverconf();
+  void set_allocated_serverconf(::frp::ServerConf* serverconf);
   private:
-  const ::frp::ProxyConf& _internal_proxyconf() const;
-  ::frp::ProxyConf* _internal_mutable_proxyconf();
+  const ::frp::ServerConf& _internal_serverconf() const;
+  ::frp::ServerConf* _internal_mutable_serverconf();
   public:
-  void unsafe_arena_set_allocated_proxyconf(
-      ::frp::ProxyConf* proxyconf);
-  ::frp::ProxyConf* unsafe_arena_release_proxyconf();
+  void unsafe_arena_set_allocated_serverconf(
+      ::frp::ServerConf* serverconf);
+  ::frp::ServerConf* unsafe_arena_release_serverconf();
 
   // @@protoc_insertion_point(class_scope:frp.Config)
  private:
@@ -1166,31 +1166,31 @@ class Config final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalProxy > localproxies_;
-  ::frp::ProxyConf* proxyconf_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalConf > localconfs_;
+  ::frp::ServerConf* serverconf_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
 // -------------------------------------------------------------------
 
-class LocalProxy final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frp.LocalProxy) */ {
+class LocalConf final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frp.LocalConf) */ {
  public:
-  inline LocalProxy() : LocalProxy(nullptr) {}
-  ~LocalProxy() override;
-  explicit constexpr LocalProxy(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline LocalConf() : LocalConf(nullptr) {}
+  ~LocalConf() override;
+  explicit constexpr LocalConf(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  LocalProxy(const LocalProxy& from);
-  LocalProxy(LocalProxy&& from) noexcept
-    : LocalProxy() {
+  LocalConf(const LocalConf& from);
+  LocalConf(LocalConf&& from) noexcept
+    : LocalConf() {
     *this = ::std::move(from);
   }
 
-  inline LocalProxy& operator=(const LocalProxy& from) {
+  inline LocalConf& operator=(const LocalConf& from) {
     CopyFrom(from);
     return *this;
   }
-  inline LocalProxy& operator=(LocalProxy&& from) noexcept {
+  inline LocalConf& operator=(LocalConf&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -1213,20 +1213,20 @@ class LocalProxy final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const LocalProxy& default_instance() {
+  static const LocalConf& default_instance() {
     return *internal_default_instance();
   }
-  static inline const LocalProxy* internal_default_instance() {
-    return reinterpret_cast<const LocalProxy*>(
-               &_LocalProxy_default_instance_);
+  static inline const LocalConf* internal_default_instance() {
+    return reinterpret_cast<const LocalConf*>(
+               &_LocalConf_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     6;
 
-  friend void swap(LocalProxy& a, LocalProxy& b) {
+  friend void swap(LocalConf& a, LocalConf& b) {
     a.Swap(&b);
   }
-  inline void Swap(LocalProxy* other) {
+  inline void Swap(LocalConf* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -1239,7 +1239,7 @@ class LocalProxy final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(LocalProxy* other) {
+  void UnsafeArenaSwap(LocalConf* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -1247,17 +1247,17 @@ class LocalProxy final :
 
   // implements Message ----------------------------------------------
 
-  inline LocalProxy* New() const final {
-    return new LocalProxy();
+  inline LocalConf* New() const final {
+    return new LocalConf();
   }
 
-  LocalProxy* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<LocalProxy>(arena);
+  LocalConf* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<LocalConf>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const LocalProxy& from);
+  void CopyFrom(const LocalConf& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const LocalProxy& from);
+  void MergeFrom(const LocalConf& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -1274,13 +1274,13 @@ class LocalProxy final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(LocalProxy* other);
+  void InternalSwap(LocalConf* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "frp.LocalProxy";
+    return "frp.LocalConf";
   }
   protected:
-  explicit LocalProxy(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit LocalConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
   static void ArenaDtor(void* object);
@@ -1333,7 +1333,7 @@ class LocalProxy final :
   void _internal_set_port(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:frp.LocalProxy)
+  // @@protoc_insertion_point(class_scope:frp.LocalConf)
  private:
   class _Internal;
 
@@ -1348,24 +1348,24 @@ class LocalProxy final :
 };
 // -------------------------------------------------------------------
 
-class ProxyConf final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frp.ProxyConf) */ {
+class ServerConf final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frp.ServerConf) */ {
  public:
-  inline ProxyConf() : ProxyConf(nullptr) {}
-  ~ProxyConf() override;
-  explicit constexpr ProxyConf(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline ServerConf() : ServerConf(nullptr) {}
+  ~ServerConf() override;
+  explicit constexpr ServerConf(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ProxyConf(const ProxyConf& from);
-  ProxyConf(ProxyConf&& from) noexcept
-    : ProxyConf() {
+  ServerConf(const ServerConf& from);
+  ServerConf(ServerConf&& from) noexcept
+    : ServerConf() {
     *this = ::std::move(from);
   }
 
-  inline ProxyConf& operator=(const ProxyConf& from) {
+  inline ServerConf& operator=(const ServerConf& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ProxyConf& operator=(ProxyConf&& from) noexcept {
+  inline ServerConf& operator=(ServerConf&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -1388,20 +1388,20 @@ class ProxyConf final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const ProxyConf& default_instance() {
+  static const ServerConf& default_instance() {
     return *internal_default_instance();
   }
-  static inline const ProxyConf* internal_default_instance() {
-    return reinterpret_cast<const ProxyConf*>(
-               &_ProxyConf_default_instance_);
+  static inline const ServerConf* internal_default_instance() {
+    return reinterpret_cast<const ServerConf*>(
+               &_ServerConf_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     7;
 
-  friend void swap(ProxyConf& a, ProxyConf& b) {
+  friend void swap(ServerConf& a, ServerConf& b) {
     a.Swap(&b);
   }
-  inline void Swap(ProxyConf* other) {
+  inline void Swap(ServerConf* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -1414,7 +1414,7 @@ class ProxyConf final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(ProxyConf* other) {
+  void UnsafeArenaSwap(ServerConf* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -1422,17 +1422,17 @@ class ProxyConf final :
 
   // implements Message ----------------------------------------------
 
-  inline ProxyConf* New() const final {
-    return new ProxyConf();
+  inline ServerConf* New() const final {
+    return new ServerConf();
   }
 
-  ProxyConf* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ProxyConf>(arena);
+  ServerConf* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ServerConf>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ProxyConf& from);
+  void CopyFrom(const ServerConf& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const ProxyConf& from);
+  void MergeFrom(const ServerConf& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -1449,13 +1449,13 @@ class ProxyConf final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ProxyConf* other);
+  void InternalSwap(ServerConf* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "frp.ProxyConf";
+    return "frp.ServerConf";
   }
   protected:
-  explicit ProxyConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit ServerConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
   static void ArenaDtor(void* object);
@@ -1498,7 +1498,7 @@ class ProxyConf final :
   void _internal_set_port(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:frp.ProxyConf)
+  // @@protoc_insertion_point(class_scope:frp.ServerConf)
  private:
   class _Internal;
 
@@ -1905,45 +1905,45 @@ inline void Msg::set_allocated_addconnrsp(::frp::AddConnRsp* addconnrsp) {
 
 // LoginReq
 
-// .frp.Config config = 1;
-inline bool LoginReq::_internal_has_config() const {
-  return this != internal_default_instance() && config_ != nullptr;
+// .frp.LocalConf localConf = 1;
+inline bool LoginReq::_internal_has_localconf() const {
+  return this != internal_default_instance() && localconf_ != nullptr;
 }
-inline bool LoginReq::has_config() const {
-  return _internal_has_config();
+inline bool LoginReq::has_localconf() const {
+  return _internal_has_localconf();
 }
-inline void LoginReq::clear_config() {
-  if (GetArenaForAllocation() == nullptr && config_ != nullptr) {
-    delete config_;
+inline void LoginReq::clear_localconf() {
+  if (GetArenaForAllocation() == nullptr && localconf_ != nullptr) {
+    delete localconf_;
   }
-  config_ = nullptr;
+  localconf_ = nullptr;
 }
-inline const ::frp::Config& LoginReq::_internal_config() const {
-  const ::frp::Config* p = config_;
-  return p != nullptr ? *p : reinterpret_cast<const ::frp::Config&>(
-      ::frp::_Config_default_instance_);
+inline const ::frp::LocalConf& LoginReq::_internal_localconf() const {
+  const ::frp::LocalConf* p = localconf_;
+  return p != nullptr ? *p : reinterpret_cast<const ::frp::LocalConf&>(
+      ::frp::_LocalConf_default_instance_);
 }
-inline const ::frp::Config& LoginReq::config() const {
-  // @@protoc_insertion_point(field_get:frp.LoginReq.config)
-  return _internal_config();
+inline const ::frp::LocalConf& LoginReq::localconf() const {
+  // @@protoc_insertion_point(field_get:frp.LoginReq.localConf)
+  return _internal_localconf();
 }
-inline void LoginReq::unsafe_arena_set_allocated_config(
-    ::frp::Config* config) {
+inline void LoginReq::unsafe_arena_set_allocated_localconf(
+    ::frp::LocalConf* localconf) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(config_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(localconf_);
   }
-  config_ = config;
-  if (config) {
+  localconf_ = localconf;
+  if (localconf) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frp.LoginReq.config)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frp.LoginReq.localConf)
 }
-inline ::frp::Config* LoginReq::release_config() {
+inline ::frp::LocalConf* LoginReq::release_localconf() {
   
-  ::frp::Config* temp = config_;
-  config_ = nullptr;
+  ::frp::LocalConf* temp = localconf_;
+  localconf_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -1955,44 +1955,44 @@ inline ::frp::Config* LoginReq::release_config() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::frp::Config* LoginReq::unsafe_arena_release_config() {
-  // @@protoc_insertion_point(field_release:frp.LoginReq.config)
+inline ::frp::LocalConf* LoginReq::unsafe_arena_release_localconf() {
+  // @@protoc_insertion_point(field_release:frp.LoginReq.localConf)
   
-  ::frp::Config* temp = config_;
-  config_ = nullptr;
+  ::frp::LocalConf* temp = localconf_;
+  localconf_ = nullptr;
   return temp;
 }
-inline ::frp::Config* LoginReq::_internal_mutable_config() {
+inline ::frp::LocalConf* LoginReq::_internal_mutable_localconf() {
   
-  if (config_ == nullptr) {
-    auto* p = CreateMaybeMessage<::frp::Config>(GetArenaForAllocation());
-    config_ = p;
+  if (localconf_ == nullptr) {
+    auto* p = CreateMaybeMessage<::frp::LocalConf>(GetArenaForAllocation());
+    localconf_ = p;
   }
-  return config_;
+  return localconf_;
 }
-inline ::frp::Config* LoginReq::mutable_config() {
-  ::frp::Config* _msg = _internal_mutable_config();
-  // @@protoc_insertion_point(field_mutable:frp.LoginReq.config)
+inline ::frp::LocalConf* LoginReq::mutable_localconf() {
+  ::frp::LocalConf* _msg = _internal_mutable_localconf();
+  // @@protoc_insertion_point(field_mutable:frp.LoginReq.localConf)
   return _msg;
 }
-inline void LoginReq::set_allocated_config(::frp::Config* config) {
+inline void LoginReq::set_allocated_localconf(::frp::LocalConf* localconf) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete config_;
+    delete localconf_;
   }
-  if (config) {
+  if (localconf) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::frp::Config>::GetOwningArena(config);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::frp::LocalConf>::GetOwningArena(localconf);
     if (message_arena != submessage_arena) {
-      config = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, config, submessage_arena);
+      localconf = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, localconf, submessage_arena);
     }
     
   } else {
     
   }
-  config_ = config;
-  // @@protoc_insertion_point(field_set_allocated:frp.LoginReq.config)
+  localconf_ = localconf;
+  // @@protoc_insertion_point(field_set_allocated:frp.LoginReq.localConf)
 }
 
 // -------------------------------------------------------------------
@@ -2204,45 +2204,45 @@ inline void AddConnRsp::set_allocated_err_msg(std::string* err_msg) {
 
 // Config
 
-// .frp.ProxyConf proxyConf = 1;
-inline bool Config::_internal_has_proxyconf() const {
-  return this != internal_default_instance() && proxyconf_ != nullptr;
+// .frp.ServerConf serverConf = 1;
+inline bool Config::_internal_has_serverconf() const {
+  return this != internal_default_instance() && serverconf_ != nullptr;
 }
-inline bool Config::has_proxyconf() const {
-  return _internal_has_proxyconf();
+inline bool Config::has_serverconf() const {
+  return _internal_has_serverconf();
 }
-inline void Config::clear_proxyconf() {
-  if (GetArenaForAllocation() == nullptr && proxyconf_ != nullptr) {
-    delete proxyconf_;
+inline void Config::clear_serverconf() {
+  if (GetArenaForAllocation() == nullptr && serverconf_ != nullptr) {
+    delete serverconf_;
   }
-  proxyconf_ = nullptr;
+  serverconf_ = nullptr;
 }
-inline const ::frp::ProxyConf& Config::_internal_proxyconf() const {
-  const ::frp::ProxyConf* p = proxyconf_;
-  return p != nullptr ? *p : reinterpret_cast<const ::frp::ProxyConf&>(
-      ::frp::_ProxyConf_default_instance_);
+inline const ::frp::ServerConf& Config::_internal_serverconf() const {
+  const ::frp::ServerConf* p = serverconf_;
+  return p != nullptr ? *p : reinterpret_cast<const ::frp::ServerConf&>(
+      ::frp::_ServerConf_default_instance_);
 }
-inline const ::frp::ProxyConf& Config::proxyconf() const {
-  // @@protoc_insertion_point(field_get:frp.Config.proxyConf)
-  return _internal_proxyconf();
+inline const ::frp::ServerConf& Config::serverconf() const {
+  // @@protoc_insertion_point(field_get:frp.Config.serverConf)
+  return _internal_serverconf();
 }
-inline void Config::unsafe_arena_set_allocated_proxyconf(
-    ::frp::ProxyConf* proxyconf) {
+inline void Config::unsafe_arena_set_allocated_serverconf(
+    ::frp::ServerConf* serverconf) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(proxyconf_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(serverconf_);
   }
-  proxyconf_ = proxyconf;
-  if (proxyconf) {
+  serverconf_ = serverconf;
+  if (serverconf) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frp.Config.proxyConf)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frp.Config.serverConf)
 }
-inline ::frp::ProxyConf* Config::release_proxyconf() {
+inline ::frp::ServerConf* Config::release_serverconf() {
   
-  ::frp::ProxyConf* temp = proxyconf_;
-  proxyconf_ = nullptr;
+  ::frp::ServerConf* temp = serverconf_;
+  serverconf_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -2254,146 +2254,146 @@ inline ::frp::ProxyConf* Config::release_proxyconf() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::frp::ProxyConf* Config::unsafe_arena_release_proxyconf() {
-  // @@protoc_insertion_point(field_release:frp.Config.proxyConf)
+inline ::frp::ServerConf* Config::unsafe_arena_release_serverconf() {
+  // @@protoc_insertion_point(field_release:frp.Config.serverConf)
   
-  ::frp::ProxyConf* temp = proxyconf_;
-  proxyconf_ = nullptr;
+  ::frp::ServerConf* temp = serverconf_;
+  serverconf_ = nullptr;
   return temp;
 }
-inline ::frp::ProxyConf* Config::_internal_mutable_proxyconf() {
+inline ::frp::ServerConf* Config::_internal_mutable_serverconf() {
   
-  if (proxyconf_ == nullptr) {
-    auto* p = CreateMaybeMessage<::frp::ProxyConf>(GetArenaForAllocation());
-    proxyconf_ = p;
+  if (serverconf_ == nullptr) {
+    auto* p = CreateMaybeMessage<::frp::ServerConf>(GetArenaForAllocation());
+    serverconf_ = p;
   }
-  return proxyconf_;
+  return serverconf_;
 }
-inline ::frp::ProxyConf* Config::mutable_proxyconf() {
-  ::frp::ProxyConf* _msg = _internal_mutable_proxyconf();
-  // @@protoc_insertion_point(field_mutable:frp.Config.proxyConf)
+inline ::frp::ServerConf* Config::mutable_serverconf() {
+  ::frp::ServerConf* _msg = _internal_mutable_serverconf();
+  // @@protoc_insertion_point(field_mutable:frp.Config.serverConf)
   return _msg;
 }
-inline void Config::set_allocated_proxyconf(::frp::ProxyConf* proxyconf) {
+inline void Config::set_allocated_serverconf(::frp::ServerConf* serverconf) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete proxyconf_;
+    delete serverconf_;
   }
-  if (proxyconf) {
+  if (serverconf) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::frp::ProxyConf>::GetOwningArena(proxyconf);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::frp::ServerConf>::GetOwningArena(serverconf);
     if (message_arena != submessage_arena) {
-      proxyconf = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, proxyconf, submessage_arena);
+      serverconf = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, serverconf, submessage_arena);
     }
     
   } else {
     
   }
-  proxyconf_ = proxyconf;
-  // @@protoc_insertion_point(field_set_allocated:frp.Config.proxyConf)
+  serverconf_ = serverconf;
+  // @@protoc_insertion_point(field_set_allocated:frp.Config.serverConf)
 }
 
-// repeated .frp.LocalProxy localProxies = 2;
-inline int Config::_internal_localproxies_size() const {
-  return localproxies_.size();
+// repeated .frp.LocalConf localConfs = 2;
+inline int Config::_internal_localconfs_size() const {
+  return localconfs_.size();
 }
-inline int Config::localproxies_size() const {
-  return _internal_localproxies_size();
+inline int Config::localconfs_size() const {
+  return _internal_localconfs_size();
 }
-inline void Config::clear_localproxies() {
-  localproxies_.Clear();
+inline void Config::clear_localconfs() {
+  localconfs_.Clear();
 }
-inline ::frp::LocalProxy* Config::mutable_localproxies(int index) {
-  // @@protoc_insertion_point(field_mutable:frp.Config.localProxies)
-  return localproxies_.Mutable(index);
+inline ::frp::LocalConf* Config::mutable_localconfs(int index) {
+  // @@protoc_insertion_point(field_mutable:frp.Config.localConfs)
+  return localconfs_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalProxy >*
-Config::mutable_localproxies() {
-  // @@protoc_insertion_point(field_mutable_list:frp.Config.localProxies)
-  return &localproxies_;
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalConf >*
+Config::mutable_localconfs() {
+  // @@protoc_insertion_point(field_mutable_list:frp.Config.localConfs)
+  return &localconfs_;
 }
-inline const ::frp::LocalProxy& Config::_internal_localproxies(int index) const {
-  return localproxies_.Get(index);
+inline const ::frp::LocalConf& Config::_internal_localconfs(int index) const {
+  return localconfs_.Get(index);
 }
-inline const ::frp::LocalProxy& Config::localproxies(int index) const {
-  // @@protoc_insertion_point(field_get:frp.Config.localProxies)
-  return _internal_localproxies(index);
+inline const ::frp::LocalConf& Config::localconfs(int index) const {
+  // @@protoc_insertion_point(field_get:frp.Config.localConfs)
+  return _internal_localconfs(index);
 }
-inline ::frp::LocalProxy* Config::_internal_add_localproxies() {
-  return localproxies_.Add();
+inline ::frp::LocalConf* Config::_internal_add_localconfs() {
+  return localconfs_.Add();
 }
-inline ::frp::LocalProxy* Config::add_localproxies() {
-  ::frp::LocalProxy* _add = _internal_add_localproxies();
-  // @@protoc_insertion_point(field_add:frp.Config.localProxies)
+inline ::frp::LocalConf* Config::add_localconfs() {
+  ::frp::LocalConf* _add = _internal_add_localconfs();
+  // @@protoc_insertion_point(field_add:frp.Config.localConfs)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalProxy >&
-Config::localproxies() const {
-  // @@protoc_insertion_point(field_list:frp.Config.localProxies)
-  return localproxies_;
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frp::LocalConf >&
+Config::localconfs() const {
+  // @@protoc_insertion_point(field_list:frp.Config.localConfs)
+  return localconfs_;
 }
 
 // -------------------------------------------------------------------
 
-// LocalProxy
+// LocalConf
 
 // .frp.Protocol protocol = 1;
-inline void LocalProxy::clear_protocol() {
+inline void LocalConf::clear_protocol() {
   protocol_ = 0;
 }
-inline ::frp::Protocol LocalProxy::_internal_protocol() const {
+inline ::frp::Protocol LocalConf::_internal_protocol() const {
   return static_cast< ::frp::Protocol >(protocol_);
 }
-inline ::frp::Protocol LocalProxy::protocol() const {
-  // @@protoc_insertion_point(field_get:frp.LocalProxy.protocol)
+inline ::frp::Protocol LocalConf::protocol() const {
+  // @@protoc_insertion_point(field_get:frp.LocalConf.protocol)
   return _internal_protocol();
 }
-inline void LocalProxy::_internal_set_protocol(::frp::Protocol value) {
+inline void LocalConf::_internal_set_protocol(::frp::Protocol value) {
   
   protocol_ = value;
 }
-inline void LocalProxy::set_protocol(::frp::Protocol value) {
+inline void LocalConf::set_protocol(::frp::Protocol value) {
   _internal_set_protocol(value);
-  // @@protoc_insertion_point(field_set:frp.LocalProxy.protocol)
+  // @@protoc_insertion_point(field_set:frp.LocalConf.protocol)
 }
 
 // string ip = 2;
-inline void LocalProxy::clear_ip() {
+inline void LocalConf::clear_ip() {
   ip_.ClearToEmpty();
 }
-inline const std::string& LocalProxy::ip() const {
-  // @@protoc_insertion_point(field_get:frp.LocalProxy.ip)
+inline const std::string& LocalConf::ip() const {
+  // @@protoc_insertion_point(field_get:frp.LocalConf.ip)
   return _internal_ip();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void LocalProxy::set_ip(ArgT0&& arg0, ArgT... args) {
+void LocalConf::set_ip(ArgT0&& arg0, ArgT... args) {
  
  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:frp.LocalProxy.ip)
+  // @@protoc_insertion_point(field_set:frp.LocalConf.ip)
 }
-inline std::string* LocalProxy::mutable_ip() {
+inline std::string* LocalConf::mutable_ip() {
   std::string* _s = _internal_mutable_ip();
-  // @@protoc_insertion_point(field_mutable:frp.LocalProxy.ip)
+  // @@protoc_insertion_point(field_mutable:frp.LocalConf.ip)
   return _s;
 }
-inline const std::string& LocalProxy::_internal_ip() const {
+inline const std::string& LocalConf::_internal_ip() const {
   return ip_.Get();
 }
-inline void LocalProxy::_internal_set_ip(const std::string& value) {
+inline void LocalConf::_internal_set_ip(const std::string& value) {
   
   ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* LocalProxy::_internal_mutable_ip() {
+inline std::string* LocalConf::_internal_mutable_ip() {
   
   return ip_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* LocalProxy::release_ip() {
-  // @@protoc_insertion_point(field_release:frp.LocalProxy.ip)
+inline std::string* LocalConf::release_ip() {
+  // @@protoc_insertion_point(field_release:frp.LocalConf.ip)
   return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void LocalProxy::set_allocated_ip(std::string* ip) {
+inline void LocalConf::set_allocated_ip(std::string* ip) {
   if (ip != nullptr) {
     
   } else {
@@ -2406,69 +2406,69 @@ inline void LocalProxy::set_allocated_ip(std::string* ip) {
     ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:frp.LocalProxy.ip)
+  // @@protoc_insertion_point(field_set_allocated:frp.LocalConf.ip)
 }
 
 // uint32 port = 3;
-inline void LocalProxy::clear_port() {
+inline void LocalConf::clear_port() {
   port_ = 0u;
 }
-inline uint32_t LocalProxy::_internal_port() const {
+inline uint32_t LocalConf::_internal_port() const {
   return port_;
 }
-inline uint32_t LocalProxy::port() const {
-  // @@protoc_insertion_point(field_get:frp.LocalProxy.port)
+inline uint32_t LocalConf::port() const {
+  // @@protoc_insertion_point(field_get:frp.LocalConf.port)
   return _internal_port();
 }
-inline void LocalProxy::_internal_set_port(uint32_t value) {
+inline void LocalConf::_internal_set_port(uint32_t value) {
   
   port_ = value;
 }
-inline void LocalProxy::set_port(uint32_t value) {
+inline void LocalConf::set_port(uint32_t value) {
   _internal_set_port(value);
-  // @@protoc_insertion_point(field_set:frp.LocalProxy.port)
+  // @@protoc_insertion_point(field_set:frp.LocalConf.port)
 }
 
 // -------------------------------------------------------------------
 
-// ProxyConf
+// ServerConf
 
 // string ip = 1;
-inline void ProxyConf::clear_ip() {
+inline void ServerConf::clear_ip() {
   ip_.ClearToEmpty();
 }
-inline const std::string& ProxyConf::ip() const {
-  // @@protoc_insertion_point(field_get:frp.ProxyConf.ip)
+inline const std::string& ServerConf::ip() const {
+  // @@protoc_insertion_point(field_get:frp.ServerConf.ip)
   return _internal_ip();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ProxyConf::set_ip(ArgT0&& arg0, ArgT... args) {
+void ServerConf::set_ip(ArgT0&& arg0, ArgT... args) {
  
  ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:frp.ProxyConf.ip)
+  // @@protoc_insertion_point(field_set:frp.ServerConf.ip)
 }
-inline std::string* ProxyConf::mutable_ip() {
+inline std::string* ServerConf::mutable_ip() {
   std::string* _s = _internal_mutable_ip();
-  // @@protoc_insertion_point(field_mutable:frp.ProxyConf.ip)
+  // @@protoc_insertion_point(field_mutable:frp.ServerConf.ip)
   return _s;
 }
-inline const std::string& ProxyConf::_internal_ip() const {
+inline const std::string& ServerConf::_internal_ip() const {
   return ip_.Get();
 }
-inline void ProxyConf::_internal_set_ip(const std::string& value) {
+inline void ServerConf::_internal_set_ip(const std::string& value) {
   
   ip_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* ProxyConf::_internal_mutable_ip() {
+inline std::string* ServerConf::_internal_mutable_ip() {
   
   return ip_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* ProxyConf::release_ip() {
-  // @@protoc_insertion_point(field_release:frp.ProxyConf.ip)
+inline std::string* ServerConf::release_ip() {
+  // @@protoc_insertion_point(field_release:frp.ServerConf.ip)
   return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void ProxyConf::set_allocated_ip(std::string* ip) {
+inline void ServerConf::set_allocated_ip(std::string* ip) {
   if (ip != nullptr) {
     
   } else {
@@ -2481,27 +2481,27 @@ inline void ProxyConf::set_allocated_ip(std::string* ip) {
     ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:frp.ProxyConf.ip)
+  // @@protoc_insertion_point(field_set_allocated:frp.ServerConf.ip)
 }
 
 // uint32 port = 2;
-inline void ProxyConf::clear_port() {
+inline void ServerConf::clear_port() {
   port_ = 0u;
 }
-inline uint32_t ProxyConf::_internal_port() const {
+inline uint32_t ServerConf::_internal_port() const {
   return port_;
 }
-inline uint32_t ProxyConf::port() const {
-  // @@protoc_insertion_point(field_get:frp.ProxyConf.port)
+inline uint32_t ServerConf::port() const {
+  // @@protoc_insertion_point(field_get:frp.ServerConf.port)
   return _internal_port();
 }
-inline void ProxyConf::_internal_set_port(uint32_t value) {
+inline void ServerConf::_internal_set_port(uint32_t value) {
   
   port_ = value;
 }
-inline void ProxyConf::set_port(uint32_t value) {
+inline void ServerConf::set_port(uint32_t value) {
   _internal_set_port(value);
-  // @@protoc_insertion_point(field_set:frp.ProxyConf.port)
+  // @@protoc_insertion_point(field_set:frp.ServerConf.port)
 }
 
 #ifdef __GNUC__

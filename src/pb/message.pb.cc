@@ -36,7 +36,7 @@ struct MsgDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MsgDefaultTypeInternal _Msg_default_instance_;
 constexpr LoginReq::LoginReq(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : config_(nullptr){}
+  : localconf_(nullptr){}
 struct LoginReqDefaultTypeInternal {
   constexpr LoginReqDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -86,8 +86,8 @@ struct AddConnRspDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT AddConnRspDefaultTypeInternal _AddConnRsp_default_instance_;
 constexpr Config::Config(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : localproxies_()
-  , proxyconf_(nullptr){}
+  : localconfs_()
+  , serverconf_(nullptr){}
 struct ConfigDefaultTypeInternal {
   constexpr ConfigDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -97,34 +97,34 @@ struct ConfigDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ConfigDefaultTypeInternal _Config_default_instance_;
-constexpr LocalProxy::LocalProxy(
+constexpr LocalConf::LocalConf(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : ip_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , protocol_(0)
 
   , port_(0u){}
-struct LocalProxyDefaultTypeInternal {
-  constexpr LocalProxyDefaultTypeInternal()
+struct LocalConfDefaultTypeInternal {
+  constexpr LocalConfDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~LocalProxyDefaultTypeInternal() {}
+  ~LocalConfDefaultTypeInternal() {}
   union {
-    LocalProxy _instance;
+    LocalConf _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LocalProxyDefaultTypeInternal _LocalProxy_default_instance_;
-constexpr ProxyConf::ProxyConf(
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LocalConfDefaultTypeInternal _LocalConf_default_instance_;
+constexpr ServerConf::ServerConf(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : ip_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , port_(0u){}
-struct ProxyConfDefaultTypeInternal {
-  constexpr ProxyConfDefaultTypeInternal()
+struct ServerConfDefaultTypeInternal {
+  constexpr ServerConfDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ProxyConfDefaultTypeInternal() {}
+  ~ServerConfDefaultTypeInternal() {}
   union {
-    ProxyConf _instance;
+    ServerConf _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ProxyConfDefaultTypeInternal _ProxyConf_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ServerConfDefaultTypeInternal _ServerConf_default_instance_;
 }  // namespace frp
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_message_2eproto[8];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_message_2eproto[2];
@@ -148,7 +148,7 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::frp::LoginReq, config_),
+  PROTOBUF_FIELD_OFFSET(::frp::LoginReq, localconf_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frp::LoginRsp, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -178,25 +178,25 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::frp::Config, proxyconf_),
-  PROTOBUF_FIELD_OFFSET(::frp::Config, localproxies_),
+  PROTOBUF_FIELD_OFFSET(::frp::Config, serverconf_),
+  PROTOBUF_FIELD_OFFSET(::frp::Config, localconfs_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::frp::LocalProxy, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::frp::LocalConf, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::frp::LocalProxy, protocol_),
-  PROTOBUF_FIELD_OFFSET(::frp::LocalProxy, ip_),
-  PROTOBUF_FIELD_OFFSET(::frp::LocalProxy, port_),
+  PROTOBUF_FIELD_OFFSET(::frp::LocalConf, protocol_),
+  PROTOBUF_FIELD_OFFSET(::frp::LocalConf, ip_),
+  PROTOBUF_FIELD_OFFSET(::frp::LocalConf, port_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::frp::ProxyConf, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::frp::ServerConf, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::frp::ProxyConf, ip_),
-  PROTOBUF_FIELD_OFFSET(::frp::ProxyConf, port_),
+  PROTOBUF_FIELD_OFFSET(::frp::ServerConf, ip_),
+  PROTOBUF_FIELD_OFFSET(::frp::ServerConf, port_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::frp::Msg)},
@@ -205,8 +205,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 27, -1, -1, sizeof(::frp::AddConnReq)},
   { 33, -1, -1, sizeof(::frp::AddConnRsp)},
   { 41, -1, -1, sizeof(::frp::Config)},
-  { 49, -1, -1, sizeof(::frp::LocalProxy)},
-  { 58, -1, -1, sizeof(::frp::ProxyConf)},
+  { 49, -1, -1, sizeof(::frp::LocalConf)},
+  { 58, -1, -1, sizeof(::frp::ServerConf)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -216,8 +216,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_AddConnReq_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_AddConnRsp_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_Config_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_LocalProxy_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_ProxyConf_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_LocalConf_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frp::_ServerConf_default_instance_),
 };
 
 const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -225,25 +225,25 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "(\0162\014.frp.MsgType\022\037\n\010loginReq\030\002 \001(\0132\r.frp"
   ".LoginReq\022\037\n\010loginRsp\030\003 \001(\0132\r.frp.LoginR"
   "sp\022#\n\naddConnReq\030\004 \001(\0132\017.frp.AddConnReq\022"
-  "#\n\naddConnRsp\030\005 \001(\0132\017.frp.AddConnRsp\"\'\n\010"
-  "LoginReq\022\033\n\006config\030\001 \001(\0132\013.frp.Config\"@\n"
-  "\010LoginRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err_msg\030\002"
-  " \001(\t\022\021\n\tclient_id\030\003 \001(\t\"\014\n\nAddConnReq\"/\n"
-  "\nAddConnRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err_msg"
-  "\030\002 \001(\t\"R\n\006Config\022!\n\tproxyConf\030\001 \001(\0132\016.fr"
-  "p.ProxyConf\022%\n\014localProxies\030\002 \003(\0132\017.frp."
-  "LocalProxy\"G\n\nLocalProxy\022\037\n\010protocol\030\001 \001"
-  "(\0162\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 "
-  "\001(\r\"%\n\tProxyConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001"
-  "(\r*\200\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000\022\025\n\021M"
-  "SGTYPE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN_RSP\020"
-  "\002\022\030\n\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGTYPE_A"
-  "DD_CONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b\006prot"
-  "o3"
+  "#\n\naddConnRsp\030\005 \001(\0132\017.frp.AddConnRsp\"-\n\010"
+  "LoginReq\022!\n\tlocalConf\030\001 \001(\0132\016.frp.LocalC"
+  "onf\"@\n\010LoginRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err"
+  "_msg\030\002 \001(\t\022\021\n\tclient_id\030\003 \001(\t\"\014\n\nAddConn"
+  "Req\"/\n\nAddConnRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007e"
+  "rr_msg\030\002 \001(\t\"Q\n\006Config\022#\n\nserverConf\030\001 \001"
+  "(\0132\017.frp.ServerConf\022\"\n\nlocalConfs\030\002 \003(\0132"
+  "\016.frp.LocalConf\"F\n\tLocalConf\022\037\n\010protocol"
+  "\030\001 \001(\0162\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004por"
+  "t\030\003 \001(\r\"&\n\nServerConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004por"
+  "t\030\002 \001(\r*\200\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000"
+  "\022\025\n\021MSGTYPE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN"
+  "_RSP\020\002\022\030\n\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGT"
+  "YPE_ADD_CONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b"
+  "\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 722, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 727, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 8,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -643,12 +643,12 @@ void Msg::InternalSwap(Msg* other) {
 
 class LoginReq::_Internal {
  public:
-  static const ::frp::Config& config(const LoginReq* msg);
+  static const ::frp::LocalConf& localconf(const LoginReq* msg);
 };
 
-const ::frp::Config&
-LoginReq::_Internal::config(const LoginReq* msg) {
-  return *msg->config_;
+const ::frp::LocalConf&
+LoginReq::_Internal::localconf(const LoginReq* msg) {
+  return *msg->localconf_;
 }
 LoginReq::LoginReq(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -662,16 +662,16 @@ LoginReq::LoginReq(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 LoginReq::LoginReq(const LoginReq& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_config()) {
-    config_ = new ::frp::Config(*from.config_);
+  if (from._internal_has_localconf()) {
+    localconf_ = new ::frp::LocalConf(*from.localconf_);
   } else {
-    config_ = nullptr;
+    localconf_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:frp.LoginReq)
 }
 
 inline void LoginReq::SharedCtor() {
-config_ = nullptr;
+localconf_ = nullptr;
 }
 
 LoginReq::~LoginReq() {
@@ -683,7 +683,7 @@ LoginReq::~LoginReq() {
 
 inline void LoginReq::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete config_;
+  if (this != internal_default_instance()) delete localconf_;
 }
 
 void LoginReq::ArenaDtor(void* object) {
@@ -702,10 +702,10 @@ void LoginReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && config_ != nullptr) {
-    delete config_;
+  if (GetArenaForAllocation() == nullptr && localconf_ != nullptr) {
+    delete localconf_;
   }
-  config_ = nullptr;
+  localconf_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -715,10 +715,10 @@ const char* LoginReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .frp.Config config = 1;
+      // .frp.LocalConf localConf = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_config(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_localconf(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -752,12 +752,12 @@ uint8_t* LoginReq::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .frp.Config config = 1;
-  if (this->_internal_has_config()) {
+  // .frp.LocalConf localConf = 1;
+  if (this->_internal_has_localconf()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        1, _Internal::config(this), target, stream);
+        1, _Internal::localconf(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -776,11 +776,11 @@ size_t LoginReq::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .frp.Config config = 1;
-  if (this->_internal_has_config()) {
+  // .frp.LocalConf localConf = 1;
+  if (this->_internal_has_localconf()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *config_);
+        *localconf_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -805,8 +805,8 @@ void LoginReq::MergeFrom(const LoginReq& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_config()) {
-    _internal_mutable_config()->::frp::Config::MergeFrom(from._internal_config());
+  if (from._internal_has_localconf()) {
+    _internal_mutable_localconf()->::frp::LocalConf::MergeFrom(from._internal_localconf());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -825,7 +825,7 @@ bool LoginReq::IsInitialized() const {
 void LoginReq::InternalSwap(LoginReq* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(config_, other->config_);
+  swap(localconf_, other->localconf_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata LoginReq::GetMetadata() const {
@@ -1384,17 +1384,17 @@ void AddConnRsp::InternalSwap(AddConnRsp* other) {
 
 class Config::_Internal {
  public:
-  static const ::frp::ProxyConf& proxyconf(const Config* msg);
+  static const ::frp::ServerConf& serverconf(const Config* msg);
 };
 
-const ::frp::ProxyConf&
-Config::_Internal::proxyconf(const Config* msg) {
-  return *msg->proxyconf_;
+const ::frp::ServerConf&
+Config::_Internal::serverconf(const Config* msg) {
+  return *msg->serverconf_;
 }
 Config::Config(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
-  localproxies_(arena) {
+  localconfs_(arena) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
@@ -1403,18 +1403,18 @@ Config::Config(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 }
 Config::Config(const Config& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      localproxies_(from.localproxies_) {
+      localconfs_(from.localconfs_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_proxyconf()) {
-    proxyconf_ = new ::frp::ProxyConf(*from.proxyconf_);
+  if (from._internal_has_serverconf()) {
+    serverconf_ = new ::frp::ServerConf(*from.serverconf_);
   } else {
-    proxyconf_ = nullptr;
+    serverconf_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:frp.Config)
 }
 
 inline void Config::SharedCtor() {
-proxyconf_ = nullptr;
+serverconf_ = nullptr;
 }
 
 Config::~Config() {
@@ -1426,7 +1426,7 @@ Config::~Config() {
 
 inline void Config::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete proxyconf_;
+  if (this != internal_default_instance()) delete serverconf_;
 }
 
 void Config::ArenaDtor(void* object) {
@@ -1445,11 +1445,11 @@ void Config::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  localproxies_.Clear();
-  if (GetArenaForAllocation() == nullptr && proxyconf_ != nullptr) {
-    delete proxyconf_;
+  localconfs_.Clear();
+  if (GetArenaForAllocation() == nullptr && serverconf_ != nullptr) {
+    delete serverconf_;
   }
-  proxyconf_ = nullptr;
+  serverconf_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1459,21 +1459,21 @@ const char* Config::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .frp.ProxyConf proxyConf = 1;
+      // .frp.ServerConf serverConf = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_proxyconf(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_serverconf(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // repeated .frp.LocalProxy localProxies = 2;
+      // repeated .frp.LocalConf localConfs = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_localproxies(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_localconfs(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
@@ -1509,20 +1509,20 @@ uint8_t* Config::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .frp.ProxyConf proxyConf = 1;
-  if (this->_internal_has_proxyconf()) {
+  // .frp.ServerConf serverConf = 1;
+  if (this->_internal_has_serverconf()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        1, _Internal::proxyconf(this), target, stream);
+        1, _Internal::serverconf(this), target, stream);
   }
 
-  // repeated .frp.LocalProxy localProxies = 2;
+  // repeated .frp.LocalConf localConfs = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_localproxies_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_localconfs_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, this->_internal_localproxies(i), target, stream);
+      InternalWriteMessage(2, this->_internal_localconfs(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1541,18 +1541,18 @@ size_t Config::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .frp.LocalProxy localProxies = 2;
-  total_size += 1UL * this->_internal_localproxies_size();
-  for (const auto& msg : this->localproxies_) {
+  // repeated .frp.LocalConf localConfs = 2;
+  total_size += 1UL * this->_internal_localconfs_size();
+  for (const auto& msg : this->localconfs_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // .frp.ProxyConf proxyConf = 1;
-  if (this->_internal_has_proxyconf()) {
+  // .frp.ServerConf serverConf = 1;
+  if (this->_internal_has_serverconf()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *proxyconf_);
+        *serverconf_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1577,9 +1577,9 @@ void Config::MergeFrom(const Config& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  localproxies_.MergeFrom(from.localproxies_);
-  if (from._internal_has_proxyconf()) {
-    _internal_mutable_proxyconf()->::frp::ProxyConf::MergeFrom(from._internal_proxyconf());
+  localconfs_.MergeFrom(from.localconfs_);
+  if (from._internal_has_serverconf()) {
+    _internal_mutable_serverconf()->::frp::ServerConf::MergeFrom(from._internal_serverconf());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1598,8 +1598,8 @@ bool Config::IsInitialized() const {
 void Config::InternalSwap(Config* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  localproxies_.InternalSwap(&other->localproxies_);
-  swap(proxyconf_, other->proxyconf_);
+  localconfs_.InternalSwap(&other->localconfs_);
+  swap(serverconf_, other->serverconf_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Config::GetMetadata() const {
@@ -1610,20 +1610,20 @@ void Config::InternalSwap(Config* other) {
 
 // ===================================================================
 
-class LocalProxy::_Internal {
+class LocalConf::_Internal {
  public:
 };
 
-LocalProxy::LocalProxy(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+LocalConf::LocalConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
   }
-  // @@protoc_insertion_point(arena_constructor:frp.LocalProxy)
+  // @@protoc_insertion_point(arena_constructor:frp.LocalConf)
 }
-LocalProxy::LocalProxy(const LocalProxy& from)
+LocalConf::LocalConf(const LocalConf& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
@@ -1637,10 +1637,10 @@ LocalProxy::LocalProxy(const LocalProxy& from)
   ::memcpy(&protocol_, &from.protocol_,
     static_cast<size_t>(reinterpret_cast<char*>(&port_) -
     reinterpret_cast<char*>(&protocol_)) + sizeof(port_));
-  // @@protoc_insertion_point(copy_constructor:frp.LocalProxy)
+  // @@protoc_insertion_point(copy_constructor:frp.LocalConf)
 }
 
-inline void LocalProxy::SharedCtor() {
+inline void LocalConf::SharedCtor() {
 ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
@@ -1651,30 +1651,30 @@ ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyIn
     reinterpret_cast<char*>(&protocol_)) + sizeof(port_));
 }
 
-LocalProxy::~LocalProxy() {
-  // @@protoc_insertion_point(destructor:frp.LocalProxy)
+LocalConf::~LocalConf() {
+  // @@protoc_insertion_point(destructor:frp.LocalConf)
   if (GetArenaForAllocation() != nullptr) return;
   SharedDtor();
   _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-inline void LocalProxy::SharedDtor() {
+inline void LocalConf::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   ip_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
-void LocalProxy::ArenaDtor(void* object) {
-  LocalProxy* _this = reinterpret_cast< LocalProxy* >(object);
+void LocalConf::ArenaDtor(void* object) {
+  LocalConf* _this = reinterpret_cast< LocalConf* >(object);
   (void)_this;
 }
-void LocalProxy::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+void LocalConf::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 }
-void LocalProxy::SetCachedSize(int size) const {
+void LocalConf::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 
-void LocalProxy::Clear() {
-// @@protoc_insertion_point(message_clear_start:frp.LocalProxy)
+void LocalConf::Clear() {
+// @@protoc_insertion_point(message_clear_start:frp.LocalConf)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1686,7 +1686,7 @@ void LocalProxy::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* LocalProxy::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* LocalConf::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -1706,7 +1706,7 @@ const char* LocalProxy::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_ip();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.LocalProxy.ip"));
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.LocalConf.ip"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1742,9 +1742,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* LocalProxy::_InternalSerialize(
+uint8_t* LocalConf::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:frp.LocalProxy)
+  // @@protoc_insertion_point(serialize_to_array_start:frp.LocalConf)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1760,7 +1760,7 @@ uint8_t* LocalProxy::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_ip().data(), static_cast<int>(this->_internal_ip().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frp.LocalProxy.ip");
+      "frp.LocalConf.ip");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_ip(), target);
   }
@@ -1775,12 +1775,12 @@ uint8_t* LocalProxy::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:frp.LocalProxy)
+  // @@protoc_insertion_point(serialize_to_array_end:frp.LocalConf)
   return target;
 }
 
-size_t LocalProxy::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:frp.LocalProxy)
+size_t LocalConf::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frp.LocalConf)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1808,21 +1808,21 @@ size_t LocalProxy::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LocalProxy::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LocalConf::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-    LocalProxy::MergeImpl
+    LocalConf::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LocalProxy::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LocalConf::GetClassData() const { return &_class_data_; }
 
-void LocalProxy::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+void LocalConf::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
                       const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-  static_cast<LocalProxy *>(to)->MergeFrom(
-      static_cast<const LocalProxy &>(from));
+  static_cast<LocalConf *>(to)->MergeFrom(
+      static_cast<const LocalConf &>(from));
 }
 
 
-void LocalProxy::MergeFrom(const LocalProxy& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:frp.LocalProxy)
+void LocalConf::MergeFrom(const LocalConf& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frp.LocalConf)
   GOOGLE_DCHECK_NE(&from, this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1839,18 +1839,18 @@ void LocalProxy::MergeFrom(const LocalProxy& from) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void LocalProxy::CopyFrom(const LocalProxy& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:frp.LocalProxy)
+void LocalConf::CopyFrom(const LocalConf& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frp.LocalConf)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool LocalProxy::IsInitialized() const {
+bool LocalConf::IsInitialized() const {
   return true;
 }
 
-void LocalProxy::InternalSwap(LocalProxy* other) {
+void LocalConf::InternalSwap(LocalConf* other) {
   using std::swap;
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
@@ -1861,14 +1861,14 @@ void LocalProxy::InternalSwap(LocalProxy* other) {
       &other->ip_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(LocalProxy, port_)
-      + sizeof(LocalProxy::port_)
-      - PROTOBUF_FIELD_OFFSET(LocalProxy, protocol_)>(
+      PROTOBUF_FIELD_OFFSET(LocalConf, port_)
+      + sizeof(LocalConf::port_)
+      - PROTOBUF_FIELD_OFFSET(LocalConf, protocol_)>(
           reinterpret_cast<char*>(&protocol_),
           reinterpret_cast<char*>(&other->protocol_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata LocalProxy::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata LocalConf::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_message_2eproto_getter, &descriptor_table_message_2eproto_once,
       file_level_metadata_message_2eproto[6]);
@@ -1876,20 +1876,20 @@ void LocalProxy::InternalSwap(LocalProxy* other) {
 
 // ===================================================================
 
-class ProxyConf::_Internal {
+class ServerConf::_Internal {
  public:
 };
 
-ProxyConf::ProxyConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+ServerConf::ServerConf(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
   }
-  // @@protoc_insertion_point(arena_constructor:frp.ProxyConf)
+  // @@protoc_insertion_point(arena_constructor:frp.ServerConf)
 }
-ProxyConf::ProxyConf(const ProxyConf& from)
+ServerConf::ServerConf(const ServerConf& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
@@ -1901,10 +1901,10 @@ ProxyConf::ProxyConf(const ProxyConf& from)
       GetArenaForAllocation());
   }
   port_ = from.port_;
-  // @@protoc_insertion_point(copy_constructor:frp.ProxyConf)
+  // @@protoc_insertion_point(copy_constructor:frp.ServerConf)
 }
 
-inline void ProxyConf::SharedCtor() {
+inline void ServerConf::SharedCtor() {
 ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
@@ -1912,30 +1912,30 @@ ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyIn
 port_ = 0u;
 }
 
-ProxyConf::~ProxyConf() {
-  // @@protoc_insertion_point(destructor:frp.ProxyConf)
+ServerConf::~ServerConf() {
+  // @@protoc_insertion_point(destructor:frp.ServerConf)
   if (GetArenaForAllocation() != nullptr) return;
   SharedDtor();
   _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-inline void ProxyConf::SharedDtor() {
+inline void ServerConf::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   ip_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
-void ProxyConf::ArenaDtor(void* object) {
-  ProxyConf* _this = reinterpret_cast< ProxyConf* >(object);
+void ServerConf::ArenaDtor(void* object) {
+  ServerConf* _this = reinterpret_cast< ServerConf* >(object);
   (void)_this;
 }
-void ProxyConf::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+void ServerConf::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 }
-void ProxyConf::SetCachedSize(int size) const {
+void ServerConf::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 
-void ProxyConf::Clear() {
-// @@protoc_insertion_point(message_clear_start:frp.ProxyConf)
+void ServerConf::Clear() {
+// @@protoc_insertion_point(message_clear_start:frp.ServerConf)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1945,7 +1945,7 @@ void ProxyConf::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* ProxyConf::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* ServerConf::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -1956,7 +1956,7 @@ const char* ProxyConf::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_ip();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.ProxyConf.ip"));
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.ServerConf.ip"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1992,9 +1992,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* ProxyConf::_InternalSerialize(
+uint8_t* ServerConf::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:frp.ProxyConf)
+  // @@protoc_insertion_point(serialize_to_array_start:frp.ServerConf)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2003,7 +2003,7 @@ uint8_t* ProxyConf::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_ip().data(), static_cast<int>(this->_internal_ip().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frp.ProxyConf.ip");
+      "frp.ServerConf.ip");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_ip(), target);
   }
@@ -2018,12 +2018,12 @@ uint8_t* ProxyConf::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:frp.ProxyConf)
+  // @@protoc_insertion_point(serialize_to_array_end:frp.ServerConf)
   return target;
 }
 
-size_t ProxyConf::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:frp.ProxyConf)
+size_t ServerConf::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frp.ServerConf)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -2045,21 +2045,21 @@ size_t ProxyConf::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ProxyConf::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ServerConf::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-    ProxyConf::MergeImpl
+    ServerConf::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ProxyConf::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ServerConf::GetClassData() const { return &_class_data_; }
 
-void ProxyConf::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+void ServerConf::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
                       const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-  static_cast<ProxyConf *>(to)->MergeFrom(
-      static_cast<const ProxyConf &>(from));
+  static_cast<ServerConf *>(to)->MergeFrom(
+      static_cast<const ServerConf &>(from));
 }
 
 
-void ProxyConf::MergeFrom(const ProxyConf& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:frp.ProxyConf)
+void ServerConf::MergeFrom(const ServerConf& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frp.ServerConf)
   GOOGLE_DCHECK_NE(&from, this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -2073,18 +2073,18 @@ void ProxyConf::MergeFrom(const ProxyConf& from) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void ProxyConf::CopyFrom(const ProxyConf& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:frp.ProxyConf)
+void ServerConf::CopyFrom(const ServerConf& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frp.ServerConf)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ProxyConf::IsInitialized() const {
+bool ServerConf::IsInitialized() const {
   return true;
 }
 
-void ProxyConf::InternalSwap(ProxyConf* other) {
+void ServerConf::InternalSwap(ServerConf* other) {
   using std::swap;
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
@@ -2097,7 +2097,7 @@ void ProxyConf::InternalSwap(ProxyConf* other) {
   swap(port_, other->port_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata ProxyConf::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata ServerConf::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_message_2eproto_getter, &descriptor_table_message_2eproto_once,
       file_level_metadata_message_2eproto[7]);
@@ -2124,11 +2124,11 @@ template<> PROTOBUF_NOINLINE ::frp::AddConnRsp* Arena::CreateMaybeMessage< ::frp
 template<> PROTOBUF_NOINLINE ::frp::Config* Arena::CreateMaybeMessage< ::frp::Config >(Arena* arena) {
   return Arena::CreateMessageInternal< ::frp::Config >(arena);
 }
-template<> PROTOBUF_NOINLINE ::frp::LocalProxy* Arena::CreateMaybeMessage< ::frp::LocalProxy >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::frp::LocalProxy >(arena);
+template<> PROTOBUF_NOINLINE ::frp::LocalConf* Arena::CreateMaybeMessage< ::frp::LocalConf >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frp::LocalConf >(arena);
 }
-template<> PROTOBUF_NOINLINE ::frp::ProxyConf* Arena::CreateMaybeMessage< ::frp::ProxyConf >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::frp::ProxyConf >(arena);
+template<> PROTOBUF_NOINLINE ::frp::ServerConf* Arena::CreateMaybeMessage< ::frp::ServerConf >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frp::ServerConf >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

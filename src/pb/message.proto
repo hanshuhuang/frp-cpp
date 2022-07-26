@@ -20,7 +20,7 @@ enum MsgType {
 
 message LoginReq {
     // 携带配置告诉对端需要开启什么端口
-    Config config = 1;
+    LocalConf localConf = 1;
 }
 
 message LoginRsp {
@@ -43,12 +43,12 @@ message AddConnRsp {
  
 message Config {
     // 公网服务器
-    ProxyConf proxyConf = 1;
+    ServerConf serverConf = 1;
     // 本地转发端口
-    repeated LocalProxy localProxies = 2;
+    repeated LocalConf localConfs = 2;
 }
 
-message LocalProxy {
+message LocalConf {
     Protocol protocol = 1;
     string ip = 2;
     uint32 port = 3;
@@ -58,7 +58,7 @@ enum Protocol {
     TCP = 0;
 }
 
-message ProxyConf {
+message ServerConf {
     string ip = 1;
     uint32 port = 2;
 }

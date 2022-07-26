@@ -4,11 +4,12 @@
 #include <string>
 #include <memory>
 #include "frp-cpp/src/TCPConnector.hpp"
+#include "frp-cpp/src/network.hpp"
 
 namespace FRP
 {
 
-class TCPClient {
+class TCPClient : public NetWorkOper {
 public:
     TCPClient(const std::string& ip, uint16_t port);
 

@@ -10,10 +10,12 @@ namespace FRP
 {
 
 class Decoder {
+public:
     std::unique_ptr<frp::Msg> Decode(const std::string& buffer);
 };
 
 class Encoder {
+public:
     std::string Encode(const frp::Msg& msg);
 };
 

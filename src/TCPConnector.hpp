@@ -3,13 +3,14 @@
 
 #include <string>
 #include <netinet/in.h>
+#include "frp-cpp/src/network.hpp"
 
 namespace FRP
 {
 /*
     管理已经存在的链接
 */
-class TCPConnector {
+class TCPConnector : public NetWorkOper {
 public:
     TCPConnector(int sockfd);
 

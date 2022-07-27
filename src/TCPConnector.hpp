@@ -20,6 +20,8 @@ public:
 
     void Close();
 
+    virtual ~TCPConnector();
+
 private:
     int sockfd;
 };

@@ -65,3 +65,7 @@ ssize_t TCPConnector::Write(void *buff, size_t count) {
 void TCPConnector::Close() {
     close(this->sockfd);
 }
+
+TCPConnector::~TCPConnector() {
+
+}

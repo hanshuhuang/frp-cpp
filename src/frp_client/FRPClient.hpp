@@ -22,7 +22,7 @@ public:
 private:
     // 发起链接到服务器，然后回包, 需要带上链接ID
     // todo: 超时机制
-    void AddConn();
+    void AddConn(std::unique_ptr<frp::Msg>);
 
 private:
     // 与公网服务器的链接

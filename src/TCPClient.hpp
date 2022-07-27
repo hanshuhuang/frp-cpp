@@ -21,6 +21,8 @@ public:
 
     void Close();
 
+    virtual ~TCPClient();
+
 private:
     std::string ip;
     uint64_t port;

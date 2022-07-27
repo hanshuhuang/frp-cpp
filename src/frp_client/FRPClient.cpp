@@ -58,7 +58,32 @@ int FRPClient::Login() {
 
     // 赋值
     clientID = rsp->loginrsp().client_id();
-    cout<<"登陆成功 分配ClientID:"<<clientID<<endl;
-
+    cout<<"登陆成功, 分配ClientID: "<<clientID<<endl;
     return 0;
+}
+
+/*
+    等待服务端的命令
+*/
+void FRPClient::WaitLoop() {
+    Framer framer;
+    Decoder decoder;
+    // todo: 链接出问题了也不会退出, 需要优化
+    while (true) {
+        auto data = framer.GetFrame(managerLink);
+        auto msg = decoder.Decode(data);
+        if (msg == nullptr) {
+            cout<<"wait loop获取到空命令"<<endl;
+            continue;
+        }
+
+        switch (msg->type())
+        {
+        case MSGTYPE_ADD_CONN_REQ:
+            AddConn(move(msg));
+            break;
+        default:
+            cout<<"unknown command type"<<msg->type()<<endl;
+        }
+    }
 }

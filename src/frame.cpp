@@ -5,14 +5,26 @@
 using namespace FRP;
 using namespace std;
 
-std::string GetFrame(shared_ptr<NetWorkOper> net) {
+tuple<std::string, int32_t> Framer::WriteFrame(std::shared_ptr<frp::Msg> msg) {
+    string payload;
+    if (msg->SerializeToString(&payload)) {
+        cout<<"写帧失败"<<endl;
+        return {"", -1};
+    }
+
+    uint32_t len = payload.size();
+    payload = Framer::WriteUint32(len) + payload;
+    return {payload, 0};
+}
+
+std::string Framer::GetFrame(shared_ptr<NetWorkOper> net) {
     char lenBuf[4];
     if (net->ReadN(lenBuf, sizeof(lenBuf)) == -1) {
         cout<<"GetFrame 读取长度失败"<<endl;
         return "";
     }
 
-    auto totalLen = ReadUint32(lenBuf);
+    auto totalLen = Framer::ReadUint32(lenBuf);
     if (totalLen == 0) {
         cout<<"GetFrame 读取数据长度为0"<<endl;
         return "";
@@ -37,7 +49,9 @@ std::string GetFrame(shared_ptr<NetWorkOper> net) {
     大端：01 02 03 04
     小端：04 03 02 01
 */
-bool isBigEnd = []() {
+bool isBigEnd = Framer::checkBigEnd();
+
+bool Framer::checkBigEnd() {
     union un {
         int digital;
         char c;
@@ -51,9 +65,9 @@ bool isBigEnd = []() {
         return false;
     }
     return true;
-}();
+}
 
-uint32_t ReadUint32(char* lenBuf) {
+uint32_t Framer::ReadUint32(char* lenBuf) {
     uint32_t d;
     char* c = (char*)&d;
     // 因为网络序是大端，所以直接解析就行
@@ -70,4 +84,21 @@ uint32_t ReadUint32(char* lenBuf) {
         c[3] = lenBuf[0];
     }
     return d;
+}
+
+std::string Framer::WriteUint32(uint32_t num) {
+    string data(4, 0);
+    char* c = (char*)&num;
+    if (isBigEnd) {
+        data[0] = c[0];
+        data[1] = c[1];
+        data[2] = c[2];
+        data[3] = c[3];
+    } else {
+        data[0] = c[3];
+        data[1] = c[2];
+        data[2] = c[1];
+        data[3] = c[0];
+    }
+    return data;
 }

@@ -49,3 +49,7 @@ ssize_t TCPClient::Write(void* buf, size_t count) {
 void TCPClient::Close() {
     c->Close();
 }
+
+TCPClient::~TCPClient() {
+    
+}

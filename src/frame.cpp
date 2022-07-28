@@ -7,8 +7,7 @@ using namespace std;
 
 tuple<std::string, int32_t> Framer::WriteFrame(std::shared_ptr<frp::Msg> msg) {
     string payload;
-    if (msg->SerializeToString(&payload)) {
-        cout<<"写帧失败"<<endl;
+    if (!msg->SerializeToString(&payload)) {
         return {"", -1};
     }
 

@@ -16,7 +16,7 @@ std::unique_ptr<frp::Msg> Decoder::Decode(const std::string& buffer) {
 
 std::string Encoder::Encode(const frp::Msg& msg) {
     std::string res;
-    if (msg.SerializeToString(&res)) {
+    if (!msg.SerializeToString(&res)) {
         std::cout<<"序列化失败"<<std::endl;
     }
     return res;

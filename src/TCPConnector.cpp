@@ -12,6 +12,10 @@ TCPConnector::TCPConnector(int sockfd) {
     // todo: 想改成非阻塞读写, 即epoll 
 }
 
+TCPConnector::TCPConnector(TCPConnector&& c) {
+    sockfd = c.sockfd;
+}
+
 ssize_t TCPConnector::Read(void *buf, size_t count) {
     ssize_t nleft;
     ssize_t nread;

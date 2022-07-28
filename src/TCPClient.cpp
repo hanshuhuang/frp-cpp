@@ -20,12 +20,13 @@ int TCPClient::Connect() {
 
     int clientFD = socket(PF_INET, SOCK_STREAM, 0);
     if (clientFD == -1) {
+        cout<<"创建socket失败"<<strerror(clientFD)<<endl;
         return ERR_SOCK_ERR;
     }
-
-    if (connect(clientFD, 
-        (struct sockaddr*)&remoteAddr, 
-        sizeof(struct sockaddr)) < 0) {
+    
+    auto ret = connect(clientFD, (struct sockaddr*)&remoteAddr, sizeof(struct sockaddr));
+    if (ret < 0) {
+        cout<<"发起链接失败"<<strerror(ret)<<endl;
         return ERR_CONNECT_ERR;
     }
 

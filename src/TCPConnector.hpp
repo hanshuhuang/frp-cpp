@@ -14,6 +14,8 @@ class TCPConnector : public NetWorkOper {
 public:
     TCPConnector(int sockfd);
 
+    TCPConnector(TCPConnector&&);
+
     ssize_t ReadN(void *buf, size_t count);
 
     ssize_t Write(void *buf, size_t count);

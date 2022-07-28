@@ -40,19 +40,19 @@ int FRPClient::Login() {
     managerLink = make_shared<TCPClient>(
         TCPClient(serverConf.ip(), serverConf.port()));
     if (managerLink->Connect() != 0) {
-        cout<<"登陆失败"<<endl;
+        cout<<"登陆失败"<<serverConf.DebugString()<<endl;
         return -1;
     }
 
     // 请求登陆
-    auto msg = Msg();
-    msg.set_type(MSGTYPE_LOGIN_REQ);
-    msg.mutable_loginreq()->mutable_localconf()->CopyFrom(localConf);
+    auto msg = make_shared<Msg>(Msg());
+    msg->set_type(MSGTYPE_LOGIN_REQ);
+    msg->mutable_loginreq()->mutable_localconf()->CopyFrom(localConf);
 
     RPC rpc;
     unique_ptr<Msg> rsp;
     int32_t retcode = 0;
-    tie(rsp, retcode) = rpc.Call(msg);
+    tie(rsp, retcode) = rpc.Call(msg, managerLink);
     if (retcode != 0) {
         cout<<"发包失败"<<endl;
         return -1;
@@ -82,6 +82,7 @@ void FRPClient::WaitLoop() {
         switch (msg->type())
         {
         case MSGTYPE_ADD_CONN_REQ:
+        {
             int32_t ret = 0;
             string errMsg;
             tie(ret, errMsg) = AddConn(move(msg));
@@ -91,6 +92,7 @@ void FRPClient::WaitLoop() {
             rsp->mutable_addconnrsp()->set_ret_code(ret);
             auto rspData = rsp->SerializeAsString();
             managerLink->Write((void*)rspData.c_str(), rspData.size());
+        }
         default:
             cout<<"unknown command type"<<msg->DebugString()<<endl;
         }
@@ -139,10 +141,11 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     }
 
     // 发送AddConn包告诉server端是哪个服务器的链接
-    auto addConnReq = make_unique<Msg>(Msg());
+    auto addConnReq = make_shared<Msg>(Msg());
     addConnReq->mutable_addconnreq()->mutable_conn_id()->append(connID);
-    RPC rpc();
+    RPC rpc;
     unique_ptr<Msg> addConnRsp;
+    // todo: 可以改用穿指针
     tie(addConnRsp, retCode) = rpc.Call(addConnReq, serverConn);
     if (retCode != 0) {
         cout<<"调用rpc新增链接失败"<<endl;

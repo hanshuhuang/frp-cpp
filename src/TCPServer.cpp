@@ -53,6 +53,7 @@ void TCPServer::Loop(CallBack cb) {
         return;
     }
 
+    cout<<"start listen"<<endl;
     while (true) {
         struct sockaddr_in addr;
         int connFD = accept(listenFD, nullptr, nullptr);
@@ -66,5 +67,6 @@ void TCPServer::Loop(CallBack cb) {
         });
         handler.detach();
     }
+    cout<<"end listen"<<endl;
     // todo: 跳出循环是否需要close？
 }

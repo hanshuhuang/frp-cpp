@@ -11,7 +11,7 @@ namespace FRP
 class RPC {
 public:
     std::tuple<std::unique_ptr<frp::Msg>, int32_t> Call(
-        frp::Msg msg, std::shared_ptr<NetWorkOper> oper);
+        std::shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper);
 };
 }
 

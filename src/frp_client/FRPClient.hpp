@@ -22,9 +22,9 @@ public:
 private:
     // 发起链接到服务器，然后回包, 需要带上链接ID
     // todo: 超时机制
-    std::tuple<int32_t, string> AddConn(std::unique_ptr<frp::Msg>);
+    std::tuple<int32_t, std::string> AddConn(std::unique_ptr<frp::Msg>);
     // 发起链接
-    std::tuple<shared_ptr<TCPClient>, int32_t, string> addConn(const string& ip, uint16_t port);
+    std::tuple<std::shared_ptr<TCPClient>, int32_t, std::string> addConn(const std::string& ip, uint16_t port);
 
 private:
     // 与公网服务器的链接

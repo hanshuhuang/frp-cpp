@@ -4,6 +4,7 @@
 #include "frp-cpp/src/TCPClient.hpp"
 #include "frp-cpp/src/codec.hpp"
 #include "frp-cpp/src/rpc.hpp"
+#include "frp-cpp/src/forward.hpp"
 #include <memory>
 #include <iostream>
 #include <thread>
@@ -149,7 +150,10 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     }
 
     // 开启转发 读localConn写serConn 读serConn写localConn
+    Forward f;
+    f.AsyncForward(localConn, serverConn);
 
-
+    // 回包成功
+    return {0, "succ"};
 }
 

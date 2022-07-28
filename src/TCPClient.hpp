@@ -13,11 +13,16 @@ class TCPClient : public NetWorkOper {
 public:
     TCPClient(const std::string& ip, uint16_t port);
 
+    // 移动构造
+    TCPClient(FRP::TCPClient&&);
+
     int Connect();
 
     ssize_t ReadN(void *buf, size_t count);
 
     ssize_t Write(void *buf, size_t count);
+
+    ssize_t Read(void *buf, size_t count);
 
     void Close();
 

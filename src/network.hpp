@@ -12,6 +12,8 @@ public:
 
     virtual ssize_t ReadN(void *buf, size_t count) = 0;
 
+    virtual ssize_t Read(void *buf, size_t count) = 0;
+
     virtual ssize_t Write(void *buf, size_t count) = 0;
 
     virtual void Close() = 0;

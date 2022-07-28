@@ -61,7 +61,8 @@ struct LoginRspDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LoginRspDefaultTypeInternal _LoginRsp_default_instance_;
 constexpr AddConnReq::AddConnReq(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : conn_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct AddConnReqDefaultTypeInternal {
   constexpr AddConnReqDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -74,6 +75,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT AddConnReqDefaultTypeInternal _
 constexpr AddConnRsp::AddConnRsp(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : err_msg_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , conn_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , ret_code_(0){}
 struct AddConnRspDefaultTypeInternal {
   constexpr AddConnRspDefaultTypeInternal()
@@ -164,6 +166,7 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::frp::AddConnReq, conn_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frp::AddConnRsp, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -172,6 +175,7 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::frp::AddConnRsp, ret_code_),
   PROTOBUF_FIELD_OFFSET(::frp::AddConnRsp, err_msg_),
+  PROTOBUF_FIELD_OFFSET(::frp::AddConnRsp, conn_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frp::Config, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -203,10 +207,10 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 11, -1, -1, sizeof(::frp::LoginReq)},
   { 18, -1, -1, sizeof(::frp::LoginRsp)},
   { 27, -1, -1, sizeof(::frp::AddConnReq)},
-  { 33, -1, -1, sizeof(::frp::AddConnRsp)},
-  { 41, -1, -1, sizeof(::frp::Config)},
-  { 49, -1, -1, sizeof(::frp::LocalConf)},
-  { 58, -1, -1, sizeof(::frp::ServerConf)},
+  { 34, -1, -1, sizeof(::frp::AddConnRsp)},
+  { 43, -1, -1, sizeof(::frp::Config)},
+  { 51, -1, -1, sizeof(::frp::LocalConf)},
+  { 60, -1, -1, sizeof(::frp::ServerConf)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -228,22 +232,23 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "#\n\naddConnRsp\030\005 \001(\0132\017.frp.AddConnRsp\"-\n\010"
   "LoginReq\022!\n\tlocalConf\030\001 \001(\0132\016.frp.LocalC"
   "onf\"@\n\010LoginRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err"
-  "_msg\030\002 \001(\t\022\021\n\tclient_id\030\003 \001(\t\"\014\n\nAddConn"
-  "Req\"/\n\nAddConnRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007e"
-  "rr_msg\030\002 \001(\t\"Q\n\006Config\022#\n\nserverConf\030\001 \001"
-  "(\0132\017.frp.ServerConf\022\"\n\nlocalConfs\030\002 \003(\0132"
-  "\016.frp.LocalConf\"F\n\tLocalConf\022\037\n\010protocol"
-  "\030\001 \001(\0162\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004por"
-  "t\030\003 \001(\r\"&\n\nServerConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004por"
-  "t\030\002 \001(\r*\200\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000"
-  "\022\025\n\021MSGTYPE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN"
-  "_RSP\020\002\022\030\n\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGT"
-  "YPE_ADD_CONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b"
-  "\006proto3"
+  "_msg\030\002 \001(\t\022\021\n\tclient_id\030\003 \001(\t\"\035\n\nAddConn"
+  "Req\022\017\n\007conn_id\030\001 \001(\t\"@\n\nAddConnRsp\022\020\n\010re"
+  "t_code\030\001 \001(\005\022\017\n\007err_msg\030\002 \001(\t\022\017\n\007conn_id"
+  "\030\003 \001(\t\"Q\n\006Config\022#\n\nserverConf\030\001 \001(\0132\017.f"
+  "rp.ServerConf\022\"\n\nlocalConfs\030\002 \003(\0132\016.frp."
+  "LocalConf\"F\n\tLocalConf\022\037\n\010protocol\030\001 \001(\016"
+  "2\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001("
+  "\r\"&\n\nServerConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001("
+  "\r*\200\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000\022\025\n\021MS"
+  "GTYPE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN_RSP\020\002"
+  "\022\030\n\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGTYPE_AD"
+  "D_CONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b\006proto"
+  "3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 727, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 761, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 8,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -1120,30 +1125,194 @@ class AddConnReq::_Internal {
 
 AddConnReq::AddConnReq(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
   // @@protoc_insertion_point(arena_constructor:frp.AddConnReq)
 }
 AddConnReq::AddConnReq(const AddConnReq& from)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  conn_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_conn_id().empty()) {
+    conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_conn_id(), 
+      GetArenaForAllocation());
+  }
   // @@protoc_insertion_point(copy_constructor:frp.AddConnReq)
 }
 
+inline void AddConnReq::SharedCtor() {
+conn_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
 
+AddConnReq::~AddConnReq() {
+  // @@protoc_insertion_point(destructor:frp.AddConnReq)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
+inline void AddConnReq::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  conn_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
 
+void AddConnReq::ArenaDtor(void* object) {
+  AddConnReq* _this = reinterpret_cast< AddConnReq* >(object);
+  (void)_this;
+}
+void AddConnReq::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void AddConnReq::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void AddConnReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:frp.AddConnReq)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  conn_id_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AddConnReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string conn_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_conn_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.AddConnReq.conn_id"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* AddConnReq::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frp.AddConnReq)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string conn_id = 1;
+  if (!this->_internal_conn_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_conn_id().data(), static_cast<int>(this->_internal_conn_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frp.AddConnReq.conn_id");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_conn_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frp.AddConnReq)
+  return target;
+}
+
+size_t AddConnReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frp.AddConnReq)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string conn_id = 1;
+  if (!this->_internal_conn_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_conn_id());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData AddConnReq::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    AddConnReq::MergeImpl
 };
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AddConnReq::GetClassData() const { return &_class_data_; }
 
+void AddConnReq::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<AddConnReq *>(to)->MergeFrom(
+      static_cast<const AddConnReq &>(from));
+}
 
 
+void AddConnReq::MergeFrom(const AddConnReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frp.AddConnReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
+  if (!from._internal_conn_id().empty()) {
+    _internal_set_conn_id(from._internal_conn_id());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
+void AddConnReq::CopyFrom(const AddConnReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frp.AddConnReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
+bool AddConnReq::IsInitialized() const {
+  return true;
+}
+
+void AddConnReq::InternalSwap(AddConnReq* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &conn_id_, lhs_arena,
+      &other->conn_id_, rhs_arena
+  );
+}
 
 ::PROTOBUF_NAMESPACE_ID::Metadata AddConnReq::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
@@ -1177,6 +1346,14 @@ AddConnRsp::AddConnRsp(const AddConnRsp& from)
     err_msg_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_err_msg(), 
       GetArenaForAllocation());
   }
+  conn_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_conn_id().empty()) {
+    conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_conn_id(), 
+      GetArenaForAllocation());
+  }
   ret_code_ = from.ret_code_;
   // @@protoc_insertion_point(copy_constructor:frp.AddConnRsp)
 }
@@ -1185,6 +1362,10 @@ inline void AddConnRsp::SharedCtor() {
 err_msg_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   err_msg_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+conn_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ret_code_ = 0;
 }
@@ -1199,6 +1380,7 @@ AddConnRsp::~AddConnRsp() {
 inline void AddConnRsp::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   err_msg_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  conn_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void AddConnRsp::ArenaDtor(void* object) {
@@ -1218,6 +1400,7 @@ void AddConnRsp::Clear() {
   (void) cached_has_bits;
 
   err_msg_.ClearToEmpty();
+  conn_id_.ClearToEmpty();
   ret_code_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -1242,6 +1425,16 @@ const char* AddConnRsp::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           auto str = _internal_mutable_err_msg();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.AddConnRsp.err_msg"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string conn_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_conn_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.AddConnRsp.conn_id"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1291,6 +1484,16 @@ uint8_t* AddConnRsp::_InternalSerialize(
         2, this->_internal_err_msg(), target);
   }
 
+  // string conn_id = 3;
+  if (!this->_internal_conn_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_conn_id().data(), static_cast<int>(this->_internal_conn_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frp.AddConnRsp.conn_id");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_conn_id(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1312,6 +1515,13 @@ size_t AddConnRsp::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_err_msg());
+  }
+
+  // string conn_id = 3;
+  if (!this->_internal_conn_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_conn_id());
   }
 
   // int32 ret_code = 1;
@@ -1344,6 +1554,9 @@ void AddConnRsp::MergeFrom(const AddConnRsp& from) {
   if (!from._internal_err_msg().empty()) {
     _internal_set_err_msg(from._internal_err_msg());
   }
+  if (!from._internal_conn_id().empty()) {
+    _internal_set_conn_id(from._internal_conn_id());
+  }
   if (from._internal_ret_code() != 0) {
     _internal_set_ret_code(from._internal_ret_code());
   }
@@ -1370,6 +1583,11 @@ void AddConnRsp::InternalSwap(AddConnRsp* other) {
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       &err_msg_, lhs_arena,
       &other->err_msg_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &conn_id_, lhs_arena,
+      &other->conn_id_, rhs_arena
   );
   swap(ret_code_, other->ret_code_);
 }

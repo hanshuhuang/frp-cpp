@@ -6,6 +6,7 @@
 #include "frp-cpp/src/rpc.hpp"
 #include <memory>
 #include <iostream>
+#include <thread>
 
 using namespace FRP;
 using namespace std;
@@ -80,10 +81,75 @@ void FRPClient::WaitLoop() {
         switch (msg->type())
         {
         case MSGTYPE_ADD_CONN_REQ:
-            AddConn(move(msg));
-            break;
+            int32_t ret = 0;
+            string errMsg;
+            tie(ret, errMsg) = AddConn(move(msg));
+            auto rsp = make_unique<Msg>(Msg());
+            rsp->set_type(MSGTYPE_ADD_CONN_RSP);
+            rsp->mutable_addconnrsp()->mutable_err_msg()->append(errMsg);
+            rsp->mutable_addconnrsp()->set_ret_code(ret);
+            auto rspData = rsp->SerializeAsString();
+            managerLink->Write((void*)rspData.c_str(), rspData.size());
         default:
-            cout<<"unknown command type"<<msg->type()<<endl;
+            cout<<"unknown command type"<<msg->DebugString()<<endl;
         }
     }
 }
+
+/*
+    1. 获取链接的ID
+    2. 发起connect到本地，开始转发
+    3. 带上linkID发起connect到server
+    4. 等待server回包ok, 开始
+*/
+tuple<shared_ptr<TCPClient>, int32_t, string> FRPClient::addConn(const string& ip, uint16_t port) {
+    // 发起链接到本地端口
+    auto localConn = make_shared<TCPClient>(TCPClient(ip, port));
+    if (localConn->Connect() != 0) {
+        cout<<"链接端口失败"<<localConf.DebugString()<<endl;
+        return {nullptr, -1, "链接端口失败"};
+    }
+
+    return {move(localConn), 0, ""};
+}
+
+tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
+    // 检查链接ID
+    auto connID = msg->addconnreq().conn_id();
+    if (connID.empty()) {
+        cout<<"链接ID为空错误"<<endl;
+        return {-1, "link id empty"};
+    }
+
+    // 开启本地链接
+    int32_t retCode = 0;
+    string errMsg;
+    shared_ptr<TCPClient> localConn;
+    tie(localConn, retCode, errMsg) = addConn(localConf.ip(), localConf.port());
+    if (retCode != 0) {
+        return {retCode, errMsg};
+    }
+
+    // 发起链接到server
+    shared_ptr<TCPClient> serverConn;
+    tie(serverConn, retCode, errMsg) = addConn(serverConf.ip(), serverConf.port());
+    if (retCode != 0) {
+        return {retCode, errMsg};
+    }
+
+    // 发送AddConn包告诉server端是哪个服务器的链接
+    auto addConnReq = make_unique<Msg>(Msg());
+    addConnReq->mutable_addconnreq()->mutable_conn_id()->append(connID);
+    RPC rpc();
+    unique_ptr<Msg> addConnRsp;
+    tie(addConnRsp, retCode) = rpc.Call(addConnReq, serverConn);
+    if (retCode != 0) {
+        cout<<"调用rpc新增链接失败"<<endl;
+        return {retCode, "调用rpc新增链接失败"};
+    }
+
+    // 开启转发 读localConn写serConn 读serConn写localConn
+
+
+}
+

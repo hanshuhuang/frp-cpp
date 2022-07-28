@@ -23,7 +23,6 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
-#include <google/protobuf/generated_message_bases.h>
 #include <google/protobuf/generated_message_table_driven.h>
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata_lite.h>
@@ -713,9 +712,10 @@ class LoginRsp final :
 // -------------------------------------------------------------------
 
 class AddConnReq final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:frp.AddConnReq) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frp.AddConnReq) */ {
  public:
   inline AddConnReq() : AddConnReq(nullptr) {}
+  ~AddConnReq() override;
   explicit constexpr AddConnReq(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   AddConnReq(const AddConnReq& from);
@@ -792,15 +792,27 @@ class AddConnReq final :
   AddConnReq* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<AddConnReq>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const AddConnReq& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(this, from);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const AddConnReq& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(this, from);
-  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const AddConnReq& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const AddConnReq& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AddConnReq* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "frp.AddConnReq";
@@ -809,6 +821,8 @@ class AddConnReq final :
   explicit AddConnReq(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
 
   static const ClassData _class_data_;
@@ -820,6 +834,23 @@ class AddConnReq final :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kConnIdFieldNumber = 1,
+  };
+  // string conn_id = 1;
+  void clear_conn_id();
+  const std::string& conn_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_conn_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_conn_id();
+  PROTOBUF_MUST_USE_RESULT std::string* release_conn_id();
+  void set_allocated_conn_id(std::string* conn_id);
+  private:
+  const std::string& _internal_conn_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_conn_id(const std::string& value);
+  std::string* _internal_mutable_conn_id();
+  public:
+
   // @@protoc_insertion_point(class_scope:frp.AddConnReq)
  private:
   class _Internal;
@@ -827,6 +858,7 @@ class AddConnReq final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr conn_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -957,6 +989,7 @@ class AddConnRsp final :
 
   enum : int {
     kErrMsgFieldNumber = 2,
+    kConnIdFieldNumber = 3,
     kRetCodeFieldNumber = 1,
   };
   // string err_msg = 2;
@@ -971,6 +1004,20 @@ class AddConnRsp final :
   const std::string& _internal_err_msg() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_err_msg(const std::string& value);
   std::string* _internal_mutable_err_msg();
+  public:
+
+  // string conn_id = 3;
+  void clear_conn_id();
+  const std::string& conn_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_conn_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_conn_id();
+  PROTOBUF_MUST_USE_RESULT std::string* release_conn_id();
+  void set_allocated_conn_id(std::string* conn_id);
+  private:
+  const std::string& _internal_conn_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_conn_id(const std::string& value);
+  std::string* _internal_mutable_conn_id();
   public:
 
   // int32 ret_code = 1;
@@ -990,6 +1037,7 @@ class AddConnRsp final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr err_msg_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr conn_id_;
   int32_t ret_code_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
@@ -2125,6 +2173,57 @@ inline void LoginRsp::set_allocated_client_id(std::string* client_id) {
 
 // AddConnReq
 
+// string conn_id = 1;
+inline void AddConnReq::clear_conn_id() {
+  conn_id_.ClearToEmpty();
+}
+inline const std::string& AddConnReq::conn_id() const {
+  // @@protoc_insertion_point(field_get:frp.AddConnReq.conn_id)
+  return _internal_conn_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void AddConnReq::set_conn_id(ArgT0&& arg0, ArgT... args) {
+ 
+ conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:frp.AddConnReq.conn_id)
+}
+inline std::string* AddConnReq::mutable_conn_id() {
+  std::string* _s = _internal_mutable_conn_id();
+  // @@protoc_insertion_point(field_mutable:frp.AddConnReq.conn_id)
+  return _s;
+}
+inline const std::string& AddConnReq::_internal_conn_id() const {
+  return conn_id_.Get();
+}
+inline void AddConnReq::_internal_set_conn_id(const std::string& value) {
+  
+  conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* AddConnReq::_internal_mutable_conn_id() {
+  
+  return conn_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* AddConnReq::release_conn_id() {
+  // @@protoc_insertion_point(field_release:frp.AddConnReq.conn_id)
+  return conn_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void AddConnReq::set_allocated_conn_id(std::string* conn_id) {
+  if (conn_id != nullptr) {
+    
+  } else {
+    
+  }
+  conn_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), conn_id,
+      GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (conn_id_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:frp.AddConnReq.conn_id)
+}
+
 // -------------------------------------------------------------------
 
 // AddConnRsp
@@ -2198,6 +2297,57 @@ inline void AddConnRsp::set_allocated_err_msg(std::string* err_msg) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:frp.AddConnRsp.err_msg)
+}
+
+// string conn_id = 3;
+inline void AddConnRsp::clear_conn_id() {
+  conn_id_.ClearToEmpty();
+}
+inline const std::string& AddConnRsp::conn_id() const {
+  // @@protoc_insertion_point(field_get:frp.AddConnRsp.conn_id)
+  return _internal_conn_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void AddConnRsp::set_conn_id(ArgT0&& arg0, ArgT... args) {
+ 
+ conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:frp.AddConnRsp.conn_id)
+}
+inline std::string* AddConnRsp::mutable_conn_id() {
+  std::string* _s = _internal_mutable_conn_id();
+  // @@protoc_insertion_point(field_mutable:frp.AddConnRsp.conn_id)
+  return _s;
+}
+inline const std::string& AddConnRsp::_internal_conn_id() const {
+  return conn_id_.Get();
+}
+inline void AddConnRsp::_internal_set_conn_id(const std::string& value) {
+  
+  conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* AddConnRsp::_internal_mutable_conn_id() {
+  
+  return conn_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* AddConnRsp::release_conn_id() {
+  // @@protoc_insertion_point(field_release:frp.AddConnRsp.conn_id)
+  return conn_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void AddConnRsp::set_allocated_conn_id(std::string* conn_id) {
+  if (conn_id != nullptr) {
+    
+  } else {
+    
+  }
+  conn_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), conn_id,
+      GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (conn_id_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:frp.AddConnRsp.conn_id)
 }
 
 // -------------------------------------------------------------------

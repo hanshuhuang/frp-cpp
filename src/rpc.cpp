@@ -7,7 +7,7 @@
 using namespace FRP;
 using namespace std;
 
-tuple<unique_ptr<frp::Msg>, int32_t> Call(frp::Msg msg, shared_ptr<NetWorkOper> oper) {
+tuple<unique_ptr<frp::Msg>, int32_t> Call(frp::Msg msg, shared_ptr<NetWorkOper>& oper) {
     // 序列化
     Encoder encoder;
     auto data = encoder.Encode(msg);

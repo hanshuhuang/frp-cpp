@@ -31,7 +31,9 @@ message LoginRsp {
 }
 
 // 公网服务器告诉客户端，需要新增一条tcp链接用以转发
+// 内网服务器告诉公网服务器，这是新增链接请求
 message AddConnReq {
+    string conn_id = 1;
 }
 
 // 客户端发起链接后告诉公网服务器可以了
@@ -39,6 +41,7 @@ message AddConnReq {
 message AddConnRsp {
     int32 ret_code = 1;
     string err_msg = 2;
+    string conn_id = 3;
 }
  
 message Config {

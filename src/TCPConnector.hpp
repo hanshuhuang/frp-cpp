@@ -18,6 +18,8 @@ public:
 
     ssize_t Write(void *buf, size_t count);
 
+    ssize_t Read(void *buf, size_t count);
+
     void Close();
 
     virtual ~TCPConnector();

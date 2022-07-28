@@ -17,6 +17,7 @@ tuple<std::string, int32_t> Framer::WriteFrame(std::shared_ptr<frp::Msg> msg) {
     return {payload, 0};
 }
 
+// todo: 建议改成 int GetFrame(net, &string data)的风格
 std::string Framer::GetFrame(shared_ptr<NetWorkOper> net) {
     char lenBuf[4];
     if (net->ReadN(lenBuf, sizeof(lenBuf)) == -1) {

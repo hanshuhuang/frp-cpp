@@ -9,6 +9,34 @@ using namespace std;
 TCPConnector::TCPConnector(int sockfd) {
     this->sockfd = sockfd;
     // todo: 根据该sockfd填充必要信息
+    // todo: 想改成非阻塞读写, 即epoll 
+}
+
+ssize_t TCPConnector::Read(void *buf, size_t count) {
+    ssize_t nleft;
+    ssize_t nread;
+    nleft=(ssize_t)count;
+    char* ptr;
+    ptr=(char*)buf;
+    nread=0;
+    while(nleft>0){
+        if((nread=read(sockfd,ptr,nleft))<0){
+            if(errno==EINTR){
+                nread=0;
+            } else{
+                cout<<"read err"<<strerror(errno)<<endl;
+                return -1;
+            }
+        } else if(nread==0){  //read返回0代表读到EOF
+            break;
+        } else{
+            // nleft-=nread;
+            // ptr+=nread;
+            // 不继续读了
+            break;
+        }
+    }
+    return nread;
 }
 
 ssize_t TCPConnector::ReadN(void *buff, size_t count) {

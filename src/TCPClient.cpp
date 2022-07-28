@@ -46,10 +46,20 @@ ssize_t TCPClient::Write(void* buf, size_t count) {
     return c->Write(buf, count);
 }
 
+ssize_t TCPClient::Read(void *buf, size_t count) {
+    return c->Read(buf, count);
+}
+
 void TCPClient::Close() {
     c->Close();
 }
 
 TCPClient::~TCPClient() {
-    
+
+}
+
+TCPClient::TCPClient(FRP::TCPClient&& c) {
+    this->ip = c.ip;
+    this->port = c.port;
+    this->c = move(c.c);
 }

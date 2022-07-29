@@ -11,9 +11,7 @@ class IDGenerator {
 public:
     static std::string GetClientID();
     static std::string GetConnID();
-private:
-    static atomic<int> id;
-}
+};
 
 } // namespace FRP
 

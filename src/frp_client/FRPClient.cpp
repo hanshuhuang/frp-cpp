@@ -40,7 +40,7 @@ int FRPClient::Login() {
     managerLink = make_shared<TCPClient>(
         TCPClient(serverConf.ip(), serverConf.port()));
     if (managerLink->Connect() != 0) {
-        cout<<"登陆失败"<<serverConf.DebugString()<<endl;
+        cout<<"客户端Login连接公网服务器失败"<<serverConf.DebugString()<<endl;
         return -1;
     }
 
@@ -79,6 +79,7 @@ void FRPClient::WaitLoop() {
             cout<<"wait loop获取到空命令"<<endl;
             continue;
         }
+        cout<<"客户端收到添加链接请求:"<<msg->DebugString()<<endl;
 
         switch (msg->type())
         {
@@ -91,15 +92,10 @@ void FRPClient::WaitLoop() {
             rsp->set_type(MSGTYPE_ADD_CONN_RSP);
             rsp->mutable_addconnrsp()->mutable_err_msg()->append(errMsg);
             rsp->mutable_addconnrsp()->set_ret_code(ret);
-            Framer f;
-            string rspData;
-            tie(rspData, ret) = f.WriteFrame(rsp);
-            if (ret != 0) {
-                cout<<"添加链接请求序列化失败"<<endl;
-                // sockfd留在析构时再调用
-                break;
+            RPC rpc;
+            if (rpc.Send(rsp, managerLink) != 0) {
+                cout<<"客户端添加请求回包失败"<<endl;
             }
-            managerLink->Write((void*)rspData.c_str(), rspData.size());
             break;
         }
         default:
@@ -142,6 +138,7 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     if (retCode != 0) {
         return {retCode, errMsg};
     }
+    cout<<"客户端开启本地链接成功"<<endl;
 
     // 发起链接到server
     shared_ptr<TCPClient> serverConn;
@@ -149,6 +146,7 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     if (retCode != 0) {
         return {retCode, errMsg};
     }
+    cout<<"客户端开启远端链接成功"<<endl;
 
     // 发送AddConn包告诉server端是哪个服务器的链接
     auto addConnReq = make_shared<Msg>(Msg());
@@ -161,8 +159,9 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     tie(addConnRsp, retCode) = rpc.Call(addConnReq, serverConn);
     if (retCode != 0) {
         cout<<"调用rpc新增链接失败"<<endl;
-        return {retCode, "调用rpc新增链接失败"};
+        return {retCode, "add conn client err"};
     }
+    cout<<"客户端知会服务端connID:"<<connID<<endl;
 
     // 开启转发 读localConn写serConn 读serConn写localConn
     Forward f;

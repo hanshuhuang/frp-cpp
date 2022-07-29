@@ -3,6 +3,9 @@
 using namespace std;
 using namespace FRP;
 
+static std::mutex mu;
+static std::map<std::string, std::shared_ptr<TCPConnector>> links;
+
 void LinkManager::Add(const std::string& connID, std::shared_ptr<TCPConnector> c) {
     lock_guard<mutex> lg(mu);
     links[connID] = c;

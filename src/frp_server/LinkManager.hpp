@@ -15,11 +15,7 @@ public:
 
     // 如果不存在返回空
     static std::shared_ptr<TCPConnector> Pop(const std::string& connID);
-
-private:
-    static std::mutex mu;
-    static map<std::string, std::shared_ptr<TCPConnector>> links;
-}
+};
 
 } // namespace FRP
 

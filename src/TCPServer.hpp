@@ -12,6 +12,7 @@
 #include <string>
 #include <string.h>
 #include <memory>
+#include <functional>
 
 namespace FRP 
 {
@@ -30,7 +31,8 @@ public:
         1. 监听外网服务器管理端口，对新的客户端链接查询，使用一收一发模型进行监听
         2. 用户发起链接，使用管理链接发送新增链接请求
     */
-    void Loop(CallBack callback);
+   // typedef void (*CallBack)(std::unique_ptr<TCPConnector> connector);
+    void Loop(std::function<void (std::unique_ptr<TCPConnector> connector)> callback);
 
 private:
     int Listen();

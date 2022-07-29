@@ -47,7 +47,7 @@ int TCPServer::Listen() {
     把链接封装成TCPConnector, 使用uniq_ptr来管理
     防止线程使用同一个数据
 */
-void TCPServer::Loop(CallBack cb) {
+void TCPServer::Loop(std::function<void (std::unique_ptr<TCPConnector> connector)> cb) {
     if (Listen() != SUCC) {
         cout<<"listen err"<<endl;
         return;

@@ -17,7 +17,7 @@ std::tuple<std::unique_ptr<frp::Msg>, int32_t> RPC::Recv(std::shared_ptr<NetWork
         return {nullptr, -1};
     }
 
-    return {msg, 0};
+    return {move(msg), 0};
 }
 
 int32_t RPC::Send(std::shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper) {

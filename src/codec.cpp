@@ -5,6 +5,7 @@
 #include <iostream>
 
 using namespace FRP;
+using namespace std;
 
 std::unique_ptr<frp::Msg> Decoder::Decode(const std::string& buffer) {
     auto msg = std::make_unique<frp::Msg>(frp::Msg());

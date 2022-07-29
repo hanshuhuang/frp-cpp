@@ -1348,6 +1348,7 @@ class LocalConf final :
     kIpFieldNumber = 2,
     kProtocolFieldNumber = 1,
     kPortFieldNumber = 3,
+    kOpenPortFieldNumber = 4,
   };
   // string ip = 2;
   void clear_ip();
@@ -1381,6 +1382,15 @@ class LocalConf final :
   void _internal_set_port(uint32_t value);
   public:
 
+  // uint32 openPort = 4;
+  void clear_openport();
+  uint32_t openport() const;
+  void set_openport(uint32_t value);
+  private:
+  uint32_t _internal_openport() const;
+  void _internal_set_openport(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frp.LocalConf)
  private:
   class _Internal;
@@ -1391,6 +1401,7 @@ class LocalConf final :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
   int protocol_;
   uint32_t port_;
+  uint32_t openport_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -2577,6 +2588,26 @@ inline void LocalConf::_internal_set_port(uint32_t value) {
 inline void LocalConf::set_port(uint32_t value) {
   _internal_set_port(value);
   // @@protoc_insertion_point(field_set:frp.LocalConf.port)
+}
+
+// uint32 openPort = 4;
+inline void LocalConf::clear_openport() {
+  openport_ = 0u;
+}
+inline uint32_t LocalConf::_internal_openport() const {
+  return openport_;
+}
+inline uint32_t LocalConf::openport() const {
+  // @@protoc_insertion_point(field_get:frp.LocalConf.openPort)
+  return _internal_openport();
+}
+inline void LocalConf::_internal_set_openport(uint32_t value) {
+  
+  openport_ = value;
+}
+inline void LocalConf::set_openport(uint32_t value) {
+  _internal_set_openport(value);
+  // @@protoc_insertion_point(field_set:frp.LocalConf.openPort)
 }
 
 // -------------------------------------------------------------------

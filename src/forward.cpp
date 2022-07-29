@@ -16,7 +16,6 @@ void Forward::Copy(std::shared_ptr<NetWorkOper> src, std::shared_ptr<NetWorkOper
             cout<<"读错误,结束转发"<<endl;
             return;
         }
-        cout<<"读到的数据"<<rret<<endl;
 
         auto wret = dst->Write((void*)buff, rret);
         if (wret <= 0) {

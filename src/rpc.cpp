@@ -31,5 +31,9 @@ std::tuple<std::unique_ptr<frp::Msg>, int32_t> RPC::Call(shared_ptr<frp::Msg> ms
     // 解析
     Decoder decoder;
     auto rsp = decoder.Decode(rspData);
+    if (rsp == nullptr) {
+        cout<<"反序列化数据失败"<<endl;
+        return {nullptr, -1};
+    }
     return {move(rsp), int32_t(0)};
 }

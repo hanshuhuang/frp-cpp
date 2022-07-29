@@ -55,6 +55,7 @@ message LocalConf {
     Protocol protocol = 1;
     string ip = 2;
     uint32 port = 3;
+    uint32 openPort = 4;
 }
 
 enum Protocol {

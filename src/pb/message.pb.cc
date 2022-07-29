@@ -104,7 +104,8 @@ constexpr LocalConf::LocalConf(
   : ip_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , protocol_(0)
 
-  , port_(0u){}
+  , port_(0u)
+  , openport_(0u){}
 struct LocalConfDefaultTypeInternal {
   constexpr LocalConfDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -193,6 +194,7 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::frp::LocalConf, protocol_),
   PROTOBUF_FIELD_OFFSET(::frp::LocalConf, ip_),
   PROTOBUF_FIELD_OFFSET(::frp::LocalConf, port_),
+  PROTOBUF_FIELD_OFFSET(::frp::LocalConf, openport_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frp::ServerConf, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -210,7 +212,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 34, -1, -1, sizeof(::frp::AddConnRsp)},
   { 43, -1, -1, sizeof(::frp::Config)},
   { 51, -1, -1, sizeof(::frp::LocalConf)},
-  { 60, -1, -1, sizeof(::frp::ServerConf)},
+  { 61, -1, -1, sizeof(::frp::ServerConf)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -237,18 +239,18 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "t_code\030\001 \001(\005\022\017\n\007err_msg\030\002 \001(\t\022\017\n\007conn_id"
   "\030\003 \001(\t\"Q\n\006Config\022#\n\nserverConf\030\001 \001(\0132\017.f"
   "rp.ServerConf\022\"\n\nlocalConfs\030\002 \003(\0132\016.frp."
-  "LocalConf\"F\n\tLocalConf\022\037\n\010protocol\030\001 \001(\016"
+  "LocalConf\"X\n\tLocalConf\022\037\n\010protocol\030\001 \001(\016"
   "2\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001("
-  "\r\"&\n\nServerConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001("
-  "\r*\200\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000\022\025\n\021MS"
-  "GTYPE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN_RSP\020\002"
-  "\022\030\n\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGTYPE_AD"
-  "D_CONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b\006proto"
-  "3"
+  "\r\022\020\n\010openPort\030\004 \001(\r\"&\n\nServerConf\022\n\n\002ip\030"
+  "\001 \001(\t\022\014\n\004port\030\002 \001(\r*\200\001\n\007MsgType\022\023\n\017MSGTY"
+  "PE_UNKNOWN\020\000\022\025\n\021MSGTYPE_LOGIN_REQ\020\001\022\025\n\021M"
+  "SGTYPE_LOGIN_RSP\020\002\022\030\n\024MSGTYPE_ADD_CONN_R"
+  "EQ\020\003\022\030\n\024MSGTYPE_ADD_CONN_RSP\020\004*\023\n\010Protoc"
+  "ol\022\007\n\003TCP\020\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 761, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 779, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 8,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -1853,8 +1855,8 @@ LocalConf::LocalConf(const LocalConf& from)
       GetArenaForAllocation());
   }
   ::memcpy(&protocol_, &from.protocol_,
-    static_cast<size_t>(reinterpret_cast<char*>(&port_) -
-    reinterpret_cast<char*>(&protocol_)) + sizeof(port_));
+    static_cast<size_t>(reinterpret_cast<char*>(&openport_) -
+    reinterpret_cast<char*>(&protocol_)) + sizeof(openport_));
   // @@protoc_insertion_point(copy_constructor:frp.LocalConf)
 }
 
@@ -1865,8 +1867,8 @@ ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyIn
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&protocol_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&port_) -
-    reinterpret_cast<char*>(&protocol_)) + sizeof(port_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&openport_) -
+    reinterpret_cast<char*>(&protocol_)) + sizeof(openport_));
 }
 
 LocalConf::~LocalConf() {
@@ -1899,8 +1901,8 @@ void LocalConf::Clear() {
 
   ip_.ClearToEmpty();
   ::memset(&protocol_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&port_) -
-      reinterpret_cast<char*>(&protocol_)) + sizeof(port_));
+      reinterpret_cast<char*>(&openport_) -
+      reinterpret_cast<char*>(&protocol_)) + sizeof(openport_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1933,6 +1935,14 @@ const char* LocalConf::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 openPort = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          openport_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1989,6 +1999,12 @@ uint8_t* LocalConf::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_port(), target);
   }
 
+  // uint32 openPort = 4;
+  if (this->_internal_openport() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_openport(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2023,6 +2039,11 @@ size_t LocalConf::ByteSizeLong() const {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_port());
   }
 
+  // uint32 openPort = 4;
+  if (this->_internal_openport() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_openport());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
 }
 
@@ -2054,6 +2075,9 @@ void LocalConf::MergeFrom(const LocalConf& from) {
   if (from._internal_port() != 0) {
     _internal_set_port(from._internal_port());
   }
+  if (from._internal_openport() != 0) {
+    _internal_set_openport(from._internal_openport());
+  }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -2079,8 +2103,8 @@ void LocalConf::InternalSwap(LocalConf* other) {
       &other->ip_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(LocalConf, port_)
-      + sizeof(LocalConf::port_)
+      PROTOBUF_FIELD_OFFSET(LocalConf, openport_)
+      + sizeof(LocalConf::openport_)
       - PROTOBUF_FIELD_OFFSET(LocalConf, protocol_)>(
           reinterpret_cast<char*>(&protocol_),
           reinterpret_cast<char*>(&other->protocol_));

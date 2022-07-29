@@ -59,6 +59,7 @@ int FRPClient::Login() {
     }
 
     // 赋值
+    cout<<"FRPClient Login"<<rsp->DebugString()<<endl;
     clientID = rsp->loginrsp().client_id();
     cout<<"登陆成功, 分配ClientID: "<<clientID<<endl;
     return 0;
@@ -86,17 +87,26 @@ void FRPClient::WaitLoop() {
             int32_t ret = 0;
             string errMsg;
             tie(ret, errMsg) = AddConn(move(msg));
-            auto rsp = make_unique<Msg>(Msg());
+            auto rsp = make_shared<Msg>(Msg());
             rsp->set_type(MSGTYPE_ADD_CONN_RSP);
             rsp->mutable_addconnrsp()->mutable_err_msg()->append(errMsg);
             rsp->mutable_addconnrsp()->set_ret_code(ret);
-            auto rspData = rsp->SerializeAsString();
+            Framer f;
+            string rspData;
+            tie(rspData, ret) = f.WriteFrame(rsp);
+            if (ret != 0) {
+                cout<<"添加链接请求序列化失败"<<endl;
+                // sockfd留在析构时再调用
+                break;
+            }
             managerLink->Write((void*)rspData.c_str(), rspData.size());
+            break;
         }
         default:
             cout<<"unknown command type"<<msg->DebugString()<<endl;
         }
     }
+    cout<<"退出waitloop"<<endl;
 }
 
 /*
@@ -142,6 +152,7 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
 
     // 发送AddConn包告诉server端是哪个服务器的链接
     auto addConnReq = make_shared<Msg>(Msg());
+    addConnReq->set_type(MSGTYPE_ADD_CONN_REQ);
     addConnReq->mutable_addconnreq()->mutable_conn_id()->append(connID);
     RPC rpc;
     unique_ptr<Msg> addConnRsp;

@@ -70,3 +70,10 @@ void TCPServer::Loop(CallBack cb) {
     cout<<"end listen"<<endl;
     // todo: 跳出循环是否需要close？
 }
+
+TCPServer::TCPServer(FRP::TCPServer&& ts) {
+    this->ip = ts.ip;
+    this->port = ts.port;
+    this->listenFD = ts.listenFD;
+    this->servaddr = ts.servaddr;
+}

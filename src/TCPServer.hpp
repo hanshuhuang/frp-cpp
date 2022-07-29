@@ -23,6 +23,8 @@ public:
     
     TCPServer(const std::string& ip, const uint16_t& port);
 
+    TCPServer(FRP::TCPServer&&);
+    
     /*
         使用场景：
         1. 监听外网服务器管理端口，对新的客户端链接查询，使用一收一发模型进行监听

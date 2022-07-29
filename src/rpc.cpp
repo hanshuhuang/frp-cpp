@@ -8,6 +8,35 @@ using namespace FRP;
 using namespace std;
 using namespace frp;
 
+std::tuple<std::unique_ptr<frp::Msg>, int32_t> RPC::Recv(std::shared_ptr<NetWorkOper> oper) {
+    Framer f;
+    auto reqData = f.GetFrame(oper);
+    auto msg = make_unique<Msg>(Msg());
+    if (!msg->ParseFromString(reqData)) {
+        cout<<"接收数据失败"<<endl;
+        return {nullptr, -1};
+    }
+
+    return {msg, 0};
+}
+
+int32_t RPC::Send(std::shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper) {
+    Framer f;
+    string data;
+    int32_t retcode = 0;
+    tie(data, retcode) = f.WriteFrame(msg);
+    if (retcode != 0) {
+        cout<<"发包错误"<<endl;
+        return -1;
+    }
+
+    if (oper->Write((void*)data.c_str(), data.size()) <= 0) {
+        return -1;
+    }
+
+    return 0;
+}
+
 std::tuple<std::unique_ptr<frp::Msg>, int32_t> RPC::Call(shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper) {
     // 序列化
     Framer framer;

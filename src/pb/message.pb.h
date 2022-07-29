@@ -836,6 +836,7 @@ class AddConnReq final :
 
   enum : int {
     kConnIdFieldNumber = 1,
+    kClientIdFieldNumber = 2,
   };
   // string conn_id = 1;
   void clear_conn_id();
@@ -851,6 +852,20 @@ class AddConnReq final :
   std::string* _internal_mutable_conn_id();
   public:
 
+  // string client_id = 2;
+  void clear_client_id();
+  const std::string& client_id() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_client_id(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_client_id();
+  PROTOBUF_MUST_USE_RESULT std::string* release_client_id();
+  void set_allocated_client_id(std::string* client_id);
+  private:
+  const std::string& _internal_client_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_id(const std::string& value);
+  std::string* _internal_mutable_client_id();
+  public:
+
   // @@protoc_insertion_point(class_scope:frp.AddConnReq)
  private:
   class _Internal;
@@ -859,6 +874,7 @@ class AddConnReq final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr conn_id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr client_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_message_2eproto;
 };
@@ -2233,6 +2249,57 @@ inline void AddConnReq::set_allocated_conn_id(std::string* conn_id) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:frp.AddConnReq.conn_id)
+}
+
+// string client_id = 2;
+inline void AddConnReq::clear_client_id() {
+  client_id_.ClearToEmpty();
+}
+inline const std::string& AddConnReq::client_id() const {
+  // @@protoc_insertion_point(field_get:frp.AddConnReq.client_id)
+  return _internal_client_id();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void AddConnReq::set_client_id(ArgT0&& arg0, ArgT... args) {
+ 
+ client_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:frp.AddConnReq.client_id)
+}
+inline std::string* AddConnReq::mutable_client_id() {
+  std::string* _s = _internal_mutable_client_id();
+  // @@protoc_insertion_point(field_mutable:frp.AddConnReq.client_id)
+  return _s;
+}
+inline const std::string& AddConnReq::_internal_client_id() const {
+  return client_id_.Get();
+}
+inline void AddConnReq::_internal_set_client_id(const std::string& value) {
+  
+  client_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* AddConnReq::_internal_mutable_client_id() {
+  
+  return client_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* AddConnReq::release_client_id() {
+  // @@protoc_insertion_point(field_release:frp.AddConnReq.client_id)
+  return client_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void AddConnReq::set_allocated_client_id(std::string* client_id) {
+  if (client_id != nullptr) {
+    
+  } else {
+    
+  }
+  client_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), client_id,
+      GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (client_id_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    client_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:frp.AddConnReq.client_id)
 }
 
 // -------------------------------------------------------------------

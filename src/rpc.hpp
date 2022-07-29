@@ -12,6 +12,11 @@ class RPC {
 public:
     std::tuple<std::unique_ptr<frp::Msg>, int32_t> Call(
         std::shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper);
+
+    std::tuple<std::unique_ptr<frp::Msg>, int32_t> Recv(
+        std::shared_ptr<NetWorkOper> oper);
+
+    int32_t Send(std::shared_ptr<frp::Msg> msg, std::shared_ptr<NetWorkOper> oper);
 };
 }
 

@@ -154,6 +154,7 @@ tuple<int32_t, string> FRPClient::AddConn(std::unique_ptr<frp::Msg> msg) {
     auto addConnReq = make_shared<Msg>(Msg());
     addConnReq->set_type(MSGTYPE_ADD_CONN_REQ);
     addConnReq->mutable_addconnreq()->mutable_conn_id()->append(connID);
+    addConnReq->mutable_addconnreq()->mutable_client_id()->append(clientID);
     RPC rpc;
     unique_ptr<Msg> addConnRsp;
     // todo: 可以改用穿指针

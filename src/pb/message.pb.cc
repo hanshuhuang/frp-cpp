@@ -62,7 +62,8 @@ struct LoginRspDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LoginRspDefaultTypeInternal _LoginRsp_default_instance_;
 constexpr AddConnReq::AddConnReq(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : conn_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  : conn_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , client_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct AddConnReqDefaultTypeInternal {
   constexpr AddConnReqDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -168,6 +169,7 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::frp::AddConnReq, conn_id_),
+  PROTOBUF_FIELD_OFFSET(::frp::AddConnReq, client_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frp::AddConnRsp, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -209,10 +211,10 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 11, -1, -1, sizeof(::frp::LoginReq)},
   { 18, -1, -1, sizeof(::frp::LoginRsp)},
   { 27, -1, -1, sizeof(::frp::AddConnReq)},
-  { 34, -1, -1, sizeof(::frp::AddConnRsp)},
-  { 43, -1, -1, sizeof(::frp::Config)},
-  { 51, -1, -1, sizeof(::frp::LocalConf)},
-  { 61, -1, -1, sizeof(::frp::ServerConf)},
+  { 35, -1, -1, sizeof(::frp::AddConnRsp)},
+  { 44, -1, -1, sizeof(::frp::Config)},
+  { 52, -1, -1, sizeof(::frp::LocalConf)},
+  { 62, -1, -1, sizeof(::frp::ServerConf)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -234,23 +236,23 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "#\n\naddConnRsp\030\005 \001(\0132\017.frp.AddConnRsp\"-\n\010"
   "LoginReq\022!\n\tlocalConf\030\001 \001(\0132\016.frp.LocalC"
   "onf\"@\n\010LoginRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err"
-  "_msg\030\002 \001(\t\022\021\n\tclient_id\030\003 \001(\t\"\035\n\nAddConn"
-  "Req\022\017\n\007conn_id\030\001 \001(\t\"@\n\nAddConnRsp\022\020\n\010re"
-  "t_code\030\001 \001(\005\022\017\n\007err_msg\030\002 \001(\t\022\017\n\007conn_id"
-  "\030\003 \001(\t\"Q\n\006Config\022#\n\nserverConf\030\001 \001(\0132\017.f"
-  "rp.ServerConf\022\"\n\nlocalConfs\030\002 \003(\0132\016.frp."
-  "LocalConf\"X\n\tLocalConf\022\037\n\010protocol\030\001 \001(\016"
-  "2\r.frp.Protocol\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001("
-  "\r\022\020\n\010openPort\030\004 \001(\r\"&\n\nServerConf\022\n\n\002ip\030"
-  "\001 \001(\t\022\014\n\004port\030\002 \001(\r*\200\001\n\007MsgType\022\023\n\017MSGTY"
-  "PE_UNKNOWN\020\000\022\025\n\021MSGTYPE_LOGIN_REQ\020\001\022\025\n\021M"
-  "SGTYPE_LOGIN_RSP\020\002\022\030\n\024MSGTYPE_ADD_CONN_R"
-  "EQ\020\003\022\030\n\024MSGTYPE_ADD_CONN_RSP\020\004*\023\n\010Protoc"
-  "ol\022\007\n\003TCP\020\000b\006proto3"
+  "_msg\030\002 \001(\t\022\021\n\tclient_id\030\003 \001(\t\"0\n\nAddConn"
+  "Req\022\017\n\007conn_id\030\001 \001(\t\022\021\n\tclient_id\030\002 \001(\t\""
+  "@\n\nAddConnRsp\022\020\n\010ret_code\030\001 \001(\005\022\017\n\007err_m"
+  "sg\030\002 \001(\t\022\017\n\007conn_id\030\003 \001(\t\"Q\n\006Config\022#\n\ns"
+  "erverConf\030\001 \001(\0132\017.frp.ServerConf\022\"\n\nloca"
+  "lConfs\030\002 \003(\0132\016.frp.LocalConf\"X\n\tLocalCon"
+  "f\022\037\n\010protocol\030\001 \001(\0162\r.frp.Protocol\022\n\n\002ip"
+  "\030\002 \001(\t\022\014\n\004port\030\003 \001(\r\022\020\n\010openPort\030\004 \001(\r\"&"
+  "\n\nServerConf\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\r*\200"
+  "\001\n\007MsgType\022\023\n\017MSGTYPE_UNKNOWN\020\000\022\025\n\021MSGTY"
+  "PE_LOGIN_REQ\020\001\022\025\n\021MSGTYPE_LOGIN_RSP\020\002\022\030\n"
+  "\024MSGTYPE_ADD_CONN_REQ\020\003\022\030\n\024MSGTYPE_ADD_C"
+  "ONN_RSP\020\004*\023\n\010Protocol\022\007\n\003TCP\020\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_message_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto = {
-  false, false, 779, descriptor_table_protodef_message_2eproto, "message.proto", 
+  false, false, 798, descriptor_table_protodef_message_2eproto, "message.proto", 
   &descriptor_table_message_2eproto_once, nullptr, 0, 8,
   schemas, file_default_instances, TableStruct_message_2eproto::offsets,
   file_level_metadata_message_2eproto, file_level_enum_descriptors_message_2eproto, file_level_service_descriptors_message_2eproto,
@@ -1145,6 +1147,14 @@ AddConnReq::AddConnReq(const AddConnReq& from)
     conn_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_conn_id(), 
       GetArenaForAllocation());
   }
+  client_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    client_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_client_id().empty()) {
+    client_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_client_id(), 
+      GetArenaForAllocation());
+  }
   // @@protoc_insertion_point(copy_constructor:frp.AddConnReq)
 }
 
@@ -1152,6 +1162,10 @@ inline void AddConnReq::SharedCtor() {
 conn_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   conn_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+client_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  client_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1165,6 +1179,7 @@ AddConnReq::~AddConnReq() {
 inline void AddConnReq::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   conn_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  client_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void AddConnReq::ArenaDtor(void* object) {
@@ -1184,6 +1199,7 @@ void AddConnReq::Clear() {
   (void) cached_has_bits;
 
   conn_id_.ClearToEmpty();
+  client_id_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1199,6 +1215,16 @@ const char* AddConnReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           auto str = _internal_mutable_conn_id();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.AddConnReq.conn_id"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string client_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_client_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frp.AddConnReq.client_id"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1242,6 +1268,16 @@ uint8_t* AddConnReq::_InternalSerialize(
         1, this->_internal_conn_id(), target);
   }
 
+  // string client_id = 2;
+  if (!this->_internal_client_id().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_client_id().data(), static_cast<int>(this->_internal_client_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frp.AddConnReq.client_id");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_client_id(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1263,6 +1299,13 @@ size_t AddConnReq::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_conn_id());
+  }
+
+  // string client_id = 2;
+  if (!this->_internal_client_id().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_client_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1290,6 +1333,9 @@ void AddConnReq::MergeFrom(const AddConnReq& from) {
   if (!from._internal_conn_id().empty()) {
     _internal_set_conn_id(from._internal_conn_id());
   }
+  if (!from._internal_client_id().empty()) {
+    _internal_set_client_id(from._internal_client_id());
+  }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1313,6 +1359,11 @@ void AddConnReq::InternalSwap(AddConnReq* other) {
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       &conn_id_, lhs_arena,
       &other->conn_id_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &client_id_, lhs_arena,
+      &other->client_id_, rhs_arena
   );
 }
 

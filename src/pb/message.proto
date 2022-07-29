@@ -34,6 +34,7 @@ message LoginRsp {
 // 内网服务器告诉公网服务器，这是新增链接请求
 message AddConnReq {
     string conn_id = 1;
+    string client_id = 2;
 }
 
 // 客户端发起链接后告诉公网服务器可以了
